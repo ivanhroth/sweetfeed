@@ -8,7 +8,10 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
+    hashed_password = db.Column(db.String(255), nullable=False)
     # email = db.Column(db.String(255), nullable=False, unique=True)
+
+    collections = db.relationship("Collection")
 
     def to_dict(self):
         return {
@@ -21,15 +24,18 @@ class User(db.Model):
 class Collection(db.Model):
     __tablename__ = 'collections'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, db.ForeignKey("User.id") primary_key=True)
     user_id = db.Column(db.Integer)
 
+    owner = db.relationship("User")
+    feeds = db.relationship("Feed", secondary=collection_feeds_table)
 
-class CollectionFeed(db.Model):
-    __tablename__ = "collection_feeds"
 
-    collection_id = db.Column(db.Integer)
-    feed_id = db.Column(db.Integer)
+collection_feeds_table = db.Table('collection_feeds_table',
+                                  db.Column(db.Integer,
+                                            db.ForeignKey("Collection.id"))
+                                  db.Column(db.Integer,
+                                            db.ForeignKey("Feed.id")))
 
 
 class Feed(db.Model):
