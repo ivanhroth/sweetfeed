@@ -3,6 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
+collection_feeds_table = db.Table('collection_feeds_table',
+                                  db.Column(db.Integer,
+                                            db.ForeignKey("collections.id"),
+                                            name="collection_id"),
+                                  db.Column(db.Integer,
+                                            db.ForeignKey("feeds.id"),
+                                            name="feed_id"))
+
+
 class User(db.Model):
     __tablename__ = 'users'
 
@@ -24,18 +33,11 @@ class User(db.Model):
 class Collection(db.Model):
     __tablename__ = 'collections'
 
-    id = db.Column(db.Integer, db.ForeignKey("User.id") primary_key=True)
+    id = db.Column(db.Integer, db.ForeignKey("users.id"), primary_key=True)
     user_id = db.Column(db.Integer)
 
     owner = db.relationship("User")
     feeds = db.relationship("Feed", secondary=collection_feeds_table)
-
-
-collection_feeds_table = db.Table('collection_feeds_table',
-                                  db.Column(db.Integer,
-                                            db.ForeignKey("Collection.id"))
-                                  db.Column(db.Integer,
-                                            db.ForeignKey("Feed.id")))
 
 
 class Feed(db.Model):
