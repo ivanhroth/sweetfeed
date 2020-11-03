@@ -2,6 +2,7 @@
 
 ## Features
 
+* Register an account and log in
 * Create a collection and add rss feeds to it by url
 * Give an rss feed a new display name within a particular collection
 * Search for rss feeds from external services by name and keywords from a single search bar
