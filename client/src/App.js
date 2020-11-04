@@ -14,6 +14,14 @@ function App() {
                 <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
             </ul>
         </nav>
+        <div class="main-container">
+            <div class="sidebar">
+
+            </div>
+            <div class="viewer-container">
+
+            </div>
+        </div>
         <Switch>
             <Route path="/users">
                 <UserList />
