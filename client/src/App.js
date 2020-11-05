@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import UserList from './components/UsersList';
+import Login from './components/Login';
 
 
 function App() {
@@ -24,7 +25,18 @@ function App() {
                     <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                 </ul>
             </nav>
-            <div class="main-container">
+            <Switch>
+                <Route path="/users">
+                    <UserList />
+                </Route>
+
+                <Route path="/login">
+                    <Login />
+                </Route>
+
+                <Route path="/">
+                    <h1>My Home Page</h1>
+                    <div class="main-container">
                 <div class="sidebar">
                     <div class="sidebar-box">
                         <h4>Collections</h4>
@@ -32,16 +44,8 @@ function App() {
                     {myCollections.map(collection => <div><h4>Collection</h4></div>)}
                 </div>
                 <div class="viewer-container">
-
                 </div>
             </div>
-            <Switch>
-                <Route path="/users">
-                    <UserList />
-                </Route>
-
-                <Route path="/">
-                    <h1>My Home Page</h1>
                 </Route>
             </Switch>
         </BrowserRouter>
