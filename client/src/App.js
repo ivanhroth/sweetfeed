@@ -5,6 +5,7 @@ import UserList from './components/UsersList';
 
 function App() {
 
+    const [user, setUser] = useState({})
     const [myCollections, setMyCollections] = useState([{}]);
 
     useEffect(async () => {
