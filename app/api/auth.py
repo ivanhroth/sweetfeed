@@ -2,10 +2,10 @@ from flask import Blueprint, jsonify, request, redirect
 from flask_jwt_extended import create_access_token
 from app.models import db, User
 
-bp = Blueprint('auth', __name__, url_prefix='')
+auth = Blueprint('auth', __name__, url_prefix='')
 
 
-@bp.route('/signup', methods=['POST'])
+@auth.route('/signup', methods=['POST'])
 def signup():
     incoming = request.get_json()
 
@@ -25,7 +25,7 @@ def signup():
     return jsonify(user=user.to_dict(), token=token)
 
 
-@bp.route('/session', methods=['PUT'])
+@auth.route('/session', methods=['PUT'])
 def login():
     incoming = request.get_json()
     user = User.query.filter_by(username=incoming['username']).one()

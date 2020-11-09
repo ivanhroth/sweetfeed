@@ -35,6 +35,7 @@ class Collection(db.Model):
 
     id = db.Column(db.Integer, db.ForeignKey("users.id"), primary_key=True)
     user_id = db.Column(db.Integer)
+    name = db.Column(db.String(140))
 
     owner = db.relationship("User")
     feeds = db.relationship("Feed", secondary=collection_feeds_table)

@@ -12,6 +12,6 @@ def index():
 
 @user_routes.route('/<int:id>/collections')
 def user_collections(id):
-    const user = User.query.filter_by(id=id).one()
-    const collections = Collection.query.filter_by(user_id=user.id).all()
+    user = User.query.filter_by(id=id).one()
+    collections = Collection.query.filter_by(user_id=user.id).all()
     return jsonify(collections)

@@ -7,7 +7,7 @@ load_dotenv()
 with app.app_context():
     db.drop_all()
 
-
+    # db.session.add(User(username="example", password="password"))
 
     db.create_all()
 
