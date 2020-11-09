@@ -1,8 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-EditCollectionForm = (id) => {
+export default function EditCollectionForm(props) {
 
-    [collectionName, setCollectionName] = useState("")
+    let collection = {name: ""};
+
+    //const retrieveCollection =
+
+    useEffect(() => {
+        async function retrieveCollection() {
+            const res = await fetch(`/collections/${props.id}`);
+            collection = await res.json();
+        }
+        retrieveCollection();
+    });
+
+    const [collectionName, setCollectionName] = useState(collection.name)
 
     return <>
     <form>
@@ -10,6 +22,10 @@ EditCollectionForm = (id) => {
         <input type="text" value={collectionName} name="name" onChange={e => {
             setCollectionName(e.target.value);
         }}></input>
+
+        {}
+
+        <button>Add Feed</button>
     </form>
     </>
 }

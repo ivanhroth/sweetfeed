@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from app.models import Collection
+from app.models import Collection, Feed
 
 data_routes = Blueprint('data', __name__)
 
@@ -10,5 +10,6 @@ def get_collection(id):
     return jsonify({
         "name": collection.name,
         "id": collection.id,
-        "user_id": collection.user_id
+        "user_id": collection.user_id,
+        "feeds": collection.feeds
     })

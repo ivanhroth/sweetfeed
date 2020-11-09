@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import EditCollectionForm from './EditCollectionForm';
 
 import User from './User';
 
@@ -19,6 +20,7 @@ function UsersList (props) {
         <>
             <h1>User List: </h1>
             {userComponents}
+            <EditCollectionForm id="1" />
         </>
         );
 }
