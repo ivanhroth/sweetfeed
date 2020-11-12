@@ -8,6 +8,7 @@ from app.models import db, User
 from app.api.user_routes import user_routes
 from app.api.auth import auth
 from app.api.data import data_routes
+from app.api.external import external_routes
 
 from app.config import Config
 
@@ -17,6 +18,7 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth)
 app.register_blueprint(data_routes)
+app.register_blueprint(external_routes)
 db.init_app(app)
 
 # Application Security
