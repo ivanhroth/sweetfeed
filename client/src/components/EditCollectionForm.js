@@ -18,6 +18,7 @@ export default function EditCollectionForm(props) {
     const [collectionName, setCollectionName] = useState(collection.name)
     const [collectionFeeds, setCollectionFeeds] = useState([]) //should use the current list of feeds associated with that collection
     const [currentResults, setCurrentResults] = useState([])
+    const [newFeed, setNewFeed] = useState([]);
 
     //https://feedsearch.dev/api/v1/search?url
     return <>
@@ -27,17 +28,20 @@ export default function EditCollectionForm(props) {
             setCollectionName(e.target.value);
         }}></input>
 
-        {/*collection.feeds.map(feed => "feed")*/};
-
         <input type="text" value={newFeed} onChange={e => {
-
-        }}></input><button>Add Feed</button>
+            setNewFeed(e.target.value)
+        }}></input><button onClick={async e => {
+            e.preventDefault();
+            const searchRes = await fetch(`https://feedsearch.dev/api/v1/search?url=${newFeed}`);
+            const results = await searchRes.json();
+            setCurrentResults(results);
+        }}>Search feeds</button>
         <div class="feed-results">
             {currentResults.map(feed => {
-                <div class="feed-result">
-                    {/* */}
+                return <div class="feed-result">
+                    <img src={feed.favicon} />
                 </div>
-            }}
+            })}
         </div>
     </form>
     </>
