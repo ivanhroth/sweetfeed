@@ -11,7 +11,7 @@ def signup():
 
     user = User(
         username=incoming['username'],
-        password=incoming['password']
+        hashed_password=generate_password_hash(incoming['password'])
     )
 
     db.session.add(user)

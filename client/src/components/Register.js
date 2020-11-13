@@ -16,15 +16,15 @@ const Register = () => {
         } else if (!password || !username || !passwordConfirm) {
             if (!errors.includes(FILL_OUT_ALL_FIELDS)) setErrors([...errors, FILL_OUT_ALL_FIELDS])
         } else {
-            const res = await fetch(`/api/signup`, {
+            const res = await fetch(`/signup`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: {
+                body: JSON.stringify({
                     username: username,
                     password: password
-                }
+                })
             });
             const outcome = await res.json();
             // if successful, redirect to the login page. otherwise, update with errors
