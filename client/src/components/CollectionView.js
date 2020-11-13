@@ -13,26 +13,24 @@ export default function CollectionView(props) {
                 const res = await fetch(`/collections/${props.id}`);
                 const collection = await res.json();
                 setCurrentCollection(collection)
-            }
-        }
-        async function loadFeedsContent() {
 
-            for (let i=0; i < currentCollection.feeds.length; i++){
-                const feed = currentCollection.feeds[i];
-                const res = await fetch(`/feedcontent/${feed.id}`);
-                const feedObj = await res.json();
-                /* feedObj.entries.forEach(entry => {
-                    if (!feedsContent.includes(entry)) setFeedsContent([...feedsContent, entry]);
-                }) */
-                setFeedsContent([...feedsContent, ...feedObj.entries])
+                for (let i=0; i < collection.feeds.length; i++){
+                    const feed = collection.feeds[i];
+                    const res = await fetch(`/feedcontent/${feed.id}`);
+                    const feedObj = await res.json();
+                    /* feedObj.entries.forEach(entry => {
+                        if (!feedsContent.includes(entry)) setFeedsContent([...feedsContent, entry]);
+                    }) */
+                    setFeedsContent([...feedsContent, ...feedObj.entries].sort((item1, item2) => item1.pubDate - item2.pubDate))
+                }
+                localStorage.setItem(FEEDS_CONTENT, JSON.stringify(feedsContent));
             }
-            setFeedsContent(feedsContent.sort((item1, item2) => item1.pubDate - item2.pubDate));
-            localStorage.setItem(FEEDS_CONTENT, JSON.stringify(feedsContent));
         }
+
         retrieveCollection();
-        if ((currentCollection.id !== 0) && (feedsContent.length === 0)){
-            loadFeedsContent();
-        }
+        // if ((currentCollection.id !== 0) && (feedsContent.length === 0)){
+        //     loadFeedsContent();
+        // }
     }, [currentCollection]);
 
     //console.log(feedsContent);
