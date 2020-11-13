@@ -1,11 +1,19 @@
 /* TODO Add site wide styles */
 
+body {
+    background-color: lightgray;
+}
+
+div {
+    background-color: beige;
+}
+
 nav ul {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 7px;
-    background-color: beige;
+    background-color: bisque;
 }
 
 nav ul li a {
@@ -53,6 +61,6 @@ input {
 
 .collection-option {
     width: 100%;
-    background-color: gray;
+    background-color: salmon;
     color: white;
 }
