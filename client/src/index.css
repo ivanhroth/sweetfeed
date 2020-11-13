@@ -3,6 +3,7 @@
 body {
     background-color: lightgray;
     font-family: Arial, Helvetica, sans-serif;
+    color: black;
 }
 
 div {
@@ -27,7 +28,7 @@ nav ul li a:hover {
 }
 
 .active {
-    color: black;
+    color: salmon;
 }
 
 button {
@@ -56,7 +57,7 @@ input {
     width: 20%;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    border: 1px solid grey;
     padding: 1px;
     margin: 2px;
 }
@@ -65,7 +66,7 @@ input {
     width: 80%;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    border: 1px solid grey;
 }
 
 .collection-option {
