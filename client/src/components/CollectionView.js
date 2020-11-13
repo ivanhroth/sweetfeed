@@ -10,20 +10,21 @@ export default function CollectionView(collectionId) {
                 setCurrentCollection(collection)
             }
         }
+        async function loadFeedsContent() {
+            for (let i=0; i < currentCollection.feeds.length; i++){
+                const res = await fetch(`/api/feedcontent/${feed.id}`);
+                const feedObj = await res.json();
+                const feedContent = feedObj.entries;
+                feedsContent = [...feedsContent, feedContent];
+            }
+        }
         retrieveCollection();
+        loadFeedsContent();
     });
 
     const [currentCollection, setCurrentCollection] = useState({ name: "", feeds: [], id: 0 });
 
     let feedsContent = [];
-
-    const loadFeedsContent = async () => {
-        for (let i=0; i < currentCollection.feeds.length; i++){
-            const res = await fetch(`/api/feedcontent/${feed.id}`);
-            const feedContent = await res.json();
-            feedsContent = [...feedsContent, feedContent]; // will have to be sorted by timestamp later
-        }
-    }
 
     return <>
            </>
