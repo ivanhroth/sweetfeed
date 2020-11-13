@@ -35,12 +35,13 @@ export default function EditCollectionForm(props) {
             const searchRes = await fetch(`/feedsearch/${newFeed}`);
             const resultsObj = await searchRes.json();
             const results = resultsObj.feeds;
-            setCurrentResults(results);
+            if (results) setCurrentResults(results);
+            else setCurrentResults([]);
         }}>Search feeds</button>
         <div class="feed-results">
             {currentResults.map(feed => {
                 return <div class="feed-result">
-                    <img src={feed.favicon} />
+                    <img src={feed.favicon} /> <span class="feed-name">{feed.title}</span>
                 </div>
             })}
         </div>

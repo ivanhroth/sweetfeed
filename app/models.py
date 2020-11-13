@@ -47,3 +47,5 @@ class Feed(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(75))
     url = db.Column(db.String(280), nullable=False)
+    collections = db.relationship("Collection",
+                                  secondary=collection_feeds_table)
