@@ -12,6 +12,15 @@ collection_feeds_table = db.Table('collection_feeds_table',
                                             name="feed_id"))
 
 
+# feed_entries_table = db.Table('feed_entries_table',
+#                               db.Column(db.Integer,
+#                                         db.ForeignKey('feeds.id'),
+#                                         name='feed_id'),
+#                               db.Column(db.Integer,
+#                                         db.ForeignKey('entries.id'),
+#                                         name='entry_id'))
+
+
 class User(db.Model):
     __tablename__ = 'users'
 
@@ -47,3 +56,17 @@ class Feed(db.Model):
     url = db.Column(db.String(280), nullable=False)
     collections = db.relationship("Collection",
                                   secondary=collection_feeds_table)
+    entries = db.relationship('Entry', back_populates='feed')
+
+
+class Entry(db.Model):
+    __tablename__ = "entries"
+
+    id = db.Column(db.Integer, primary_key=True)
+    feed_id = db.Column(db.Integer, ForeignKey('feed.id'))
+    url = db.Column(db.String(500), nullable=False)
+    title = db.Column(db.String(280))
+    content = db.Column(db.Text)
+    published = db.Column(db.Date)
+
+    feed = relationship('Feed', back_populates="entries")
