@@ -64,3 +64,8 @@ input {
     background-color: salmon;
     color: white;
 }
+
+.edit-collection-form {
+    display: flex;
+    flex-direction: column;
+}
