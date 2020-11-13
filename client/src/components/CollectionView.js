@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-export default function CollectionView(props) {
+const FEEDS_CONTENT = 'FEEDS_CONTENT';
 
-    const [feedsContent, setFeedsContent] = useState([]);
+export default function CollectionView(props) {
+    const [feedsContent, setFeedsContent] = useState(localStorage.getItem(FEEDS_CONTENT) ? JSON.parse(localStorage.getItem(FEEDS_CONTENT)): []);
     const [currentCollection, setCurrentCollection] = useState({ name: "", feeds: [], id: 0 });
 
 
@@ -15,24 +16,29 @@ export default function CollectionView(props) {
             }
         }
         async function loadFeedsContent() {
-                for (let i=0; i < currentCollection.feeds.length; i++){
-                    const feed = currentCollection.feeds[i];
-                    const res = await fetch(`/feedcontent/${feed.id}`);
-                    const feedObj = await res.json();
-                    const feedContent = feedObj.entries;
-                    for (let i=0; i < feedContent.length; i++){
-                        if (!feedsContent.includes(feedContent[i])) setFeedsContent([...feedsContent, feedContent[i]]);
-                    }
-                }
+            for (let i=0; i < currentCollection.feeds.length; i++){
+                const feed = currentCollection.feeds[i];
+                const res = await fetch(`/feedcontent/${feed.id}`);
+                const feedObj = await res.json();
+                /* feedObj.entries.forEach(entry => {
+                    if (!feedsContent.includes(entry)) setFeedsContent([...feedsContent, entry]);
+                }) */
+                setFeedsContent([...feedsContent, ...feedObj.entries])
+            }
+            setFeedsContent(feedsContent.sort((item1, item2) => item1.pubDate - item2.pubDate));
+            localStorage.setItem(FEEDS_CONTENT, JSON.stringify(feedsContent));
         }
         retrieveCollection();
-        loadFeedsContent();
-    }, [props.id, currentCollection]);
+        if ((currentCollection.id !== 0) && (feedsContent.length === 0)){
+            loadFeedsContent();
+        }
+    }, [currentCollection]);
 
+    console.log(feedsContent);
     return <>
-            {feedsContent.map((feed, i) => {
-                return <div className="news-item" key={}>
-                        News item
+            {feedsContent.map((item, i) => {
+                return <div className="news-item" key={i}>
+                        {item.title}
                        </div>
             })}
            </>
