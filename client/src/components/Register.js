@@ -16,7 +16,7 @@ const Register = () => {
         } else if (!password || !username || !passwordConfirm) {
             if (!errors.includes(FILL_OUT_ALL_FIELDS)) setErrors([...errors, FILL_OUT_ALL_FIELDS])
         } else {
-            const res = await fetch(`/api/register`, {
+            const res = await fetch(`/api/signup`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
