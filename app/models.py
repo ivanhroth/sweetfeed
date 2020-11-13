@@ -63,10 +63,10 @@ class Entry(db.Model):
     __tablename__ = "entries"
 
     id = db.Column(db.Integer, primary_key=True)
-    feed_id = db.Column(db.Integer, ForeignKey('feed.id'))
+    feed_id = db.Column(db.Integer, db.ForeignKey('feeds.id'))
     url = db.Column(db.String(500), nullable=False)
     title = db.Column(db.String(280))
     content = db.Column(db.Text)
     published = db.Column(db.Date)
 
-    feed = relationship('Feed', back_populates="entries")
+    feed = db.relationship('Feed', back_populates="entries")
