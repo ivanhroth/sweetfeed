@@ -10,6 +10,7 @@ export default function EditCollectionForm(props) {
         async function retrieveCollection() {
             const res = await fetch(`/collections/${props.id}`);
             collection = await res.json();
+            if (collectionFeeds === [] && collection.feeds) setCollectionFeeds(collection.feeds);
             if (collectionName && collection.name !== collectionName) console.log("change the name in the database");
         }
         retrieveCollection();
@@ -19,6 +20,11 @@ export default function EditCollectionForm(props) {
     const [collectionFeeds, setCollectionFeeds] = useState([]) //should use the current list of feeds associated with that collection
     const [currentResults, setCurrentResults] = useState([])
     const [newFeed, setNewFeed] = useState([]);
+
+    const updateCollectionFeeds = feed => {
+        // add the feed to the collection in the database
+        setCollectionFeeds([...collectionFeeds, feed])
+    }
 
     //https://feedsearch.dev/api/v1/search?url
     return <>

@@ -18,7 +18,6 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    # email = db.Column(db.String(255), nullable=False, unique=True)
 
     collections = db.relationship("Collection")
 
@@ -26,7 +25,6 @@ class User(db.Model):
         return {
           "id": self.id,
           "username": self.username,
-          # "email": self.email
         }
 
 
