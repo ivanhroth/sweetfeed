@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
 from app.models import Collection, Feed
 import requests as req
+import feedparser
 
 external_routes = Blueprint('external', __name__)
 
@@ -16,3 +17,4 @@ def search_feed(domain):
 def retrieve_feed_content(id):
     feed = Feed.query.filter(id=id).one()
     feed_url = feed.url
+    return jsonify(feedparser.parse(feed_url))
