@@ -25,5 +25,15 @@ const Register = () => {
     }
 
     return <>
+            <form>
+                <label htmlFor="username">Username: </label>
+                <input type="text" onChange={e => setUsername(e.target.value)} value={username} name="username" />
+
+                <label htmlFor="password">Password: </label>
+                <input type="password" onChange={e => setPassword(e.target.value)} value={password} name="password" />
+
+                <label htmlFor="confirm-password">Confirm password: </label>
+                <input type="password" onChange={e => setPasswordConfirm(e.target.value)} value={passwordConfirm} name="confirm-password" />
+            </form>
            </>
 }
