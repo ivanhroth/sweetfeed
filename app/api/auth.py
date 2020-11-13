@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, redirect
 from flask_jwt_extended import create_access_token
 from app.models import db, User
+from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint('auth', __name__, url_prefix='')
 
@@ -29,7 +30,8 @@ def signup():
 def login():
     incoming = request.get_json()
     user = User.query.filter_by(username=incoming['username']).one()
-    if user and user.check_password(incoming['password']):
+    if user and \
+       check_password_hash(user.hashed_password, incoming['password']):
         token = create_access_token(identity=user.username)
         return jsonify(user=user.to_dict(), token=token)
     else:
