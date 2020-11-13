@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-export default function CollectionView(collectionId) {
+export default function CollectionView(props) {
+
+    const [feedsContent, setFeedsContent] = useState([]);
 
     useEffect(() => {
         async function retrieveCollection() {
@@ -12,10 +14,11 @@ export default function CollectionView(collectionId) {
         }
         async function loadFeedsContent() {
             for (let i=0; i < currentCollection.feeds.length; i++){
+                const feed = currentCollection.feeds[i];
                 const res = await fetch(`/api/feedcontent/${feed.id}`);
                 const feedObj = await res.json();
                 const feedContent = feedObj.entries;
-                feedsContent = [...feedsContent, feedContent];
+                setFeedsContent([...feedsContent, feedContent]);
             }
         }
         retrieveCollection();
@@ -24,8 +27,7 @@ export default function CollectionView(collectionId) {
 
     const [currentCollection, setCurrentCollection] = useState({ name: "", feeds: [], id: 0 });
 
-    let feedsContent = [];
-
     return <>
+            {feedsContent}
            </>
 }
