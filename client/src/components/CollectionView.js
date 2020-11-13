@@ -28,6 +28,10 @@ export default function CollectionView(props) {
     const [currentCollection, setCurrentCollection] = useState({ name: "", feeds: [], id: 0 });
 
     return <>
-            {feedsContent}
+            {feedsContent.map(feed => {
+                return <div className="news-item">
+                        News item
+                       </div>
+            })}
            </>
 }
