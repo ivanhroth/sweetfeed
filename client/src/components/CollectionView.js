@@ -16,6 +16,7 @@ export default function CollectionView(props) {
             }
         }
         async function loadFeedsContent() {
+
             for (let i=0; i < currentCollection.feeds.length; i++){
                 const feed = currentCollection.feeds[i];
                 const res = await fetch(`/feedcontent/${feed.id}`);
@@ -34,7 +35,7 @@ export default function CollectionView(props) {
         }
     }, [currentCollection]);
 
-    console.log(feedsContent);
+    //console.log(feedsContent);
     return <>
             {feedsContent.map((item, i) => {
                 return <div className="news-item" key={i}>
