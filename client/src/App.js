@@ -50,9 +50,9 @@ function App() {
                         <h4>Collections</h4>
                     </div>
                     {myCollections.map(collection => <div key={collection.id} className="collection-option">
-                        <button onClick={() => {
+                        <span onClick={() => {
                         setCurrentView(<CollectionView id={collection.id} />);
-                    }}>{collection.name}</button>
+                    }}>{collection.name}</span>
                     </div>)}
                 </div>
                 <div className="viewer-container">

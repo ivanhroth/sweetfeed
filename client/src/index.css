@@ -46,3 +46,9 @@ input {
     flex-direction: column;
     border: 1px solid black;
 }
+
+.collection-option {
+    width: 100%;
+    background-color: gray;
+    color: white;
+}
