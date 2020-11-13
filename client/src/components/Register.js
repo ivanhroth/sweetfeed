@@ -26,14 +26,25 @@ const Register = () => {
 
     return <>
             <form>
+                <div>
                 <label htmlFor="username">Username: </label>
                 <input type="text" onChange={e => setUsername(e.target.value)} value={username} name="username" />
+                </div>
 
+                <div>
                 <label htmlFor="password">Password: </label>
                 <input type="password" onChange={e => setPassword(e.target.value)} value={password} name="password" />
+                </div>
 
+                <div>
                 <label htmlFor="confirm-password">Confirm password: </label>
                 <input type="password" onChange={e => setPasswordConfirm(e.target.value)} value={passwordConfirm} name="confirm-password" />
+                </div>
+
+                <button type="submit" onClick={e => {
+                    e.preventDefault();
+                    tryRegistration();
+                }}>Register</button>
             </form>
            </>
 }
