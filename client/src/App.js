@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import UserList from './components/UsersList';
 import Login from './components/Login';
+import Register from './components/Register';
 import CollectionView from './components/CollectionView';
 
 
@@ -30,7 +31,7 @@ function App() {
             <nav>
                 <ul>
                     <li><NavLink to="/" exact activeclass="active">Home</NavLink></li>
-                    <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
+                    {user ? <li><NavLink to="/login" activeclass="active">Log in</NavLink> or <NavLink to="/register" activeclass="active">Register an account</NavLink></li> : <></>}
                 </ul>
             </nav>
             <Switch>
@@ -40,6 +41,10 @@ function App() {
 
                 <Route path="/login">
                     <Login />
+                </Route>
+
+                <Route path="/register">
+                    <Register />
                 </Route>
 
                 <Route path="/">

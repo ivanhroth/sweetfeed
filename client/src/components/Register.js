@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const NONMATCHING_PASSWORDS = "Password fields do not match."
 
@@ -37,3 +37,5 @@ const Register = () => {
             </form>
            </>
 }
+
+export default Register;
