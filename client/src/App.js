@@ -10,15 +10,19 @@ function App() {
     const [user, setUser] = useState({})
     const [myCollections, setMyCollections] = useState([{name: "", feeds: [], id: 0}]);
     const [currentCollectionId, setCurrentCollectionId] = useState(0);
+    const [currentView, setCurrentView] = useState(<></>);
 
-    let currentView = <></>
-
-    useEffect(async () => {
+    const retrieveCollections = async () => {
         if (myCollections[0].name === "") {
-            const res = await fetch(`/users/${user.id}/collections`);
+            //const res = await fetch(`/users/${user.id}/collections`);
+            const res = await fetch(`/api/users/1/collections`); // for testing purposes only
             const collections = await res.json();
             setMyCollections(collections);
         }
+    }
+
+    useEffect(() => {
+        retrieveCollections();
     })
 
     return (
@@ -45,9 +49,10 @@ function App() {
                     <div className="sidebar-box">
                         <h4>Collections</h4>
                     </div>
-                    {myCollections.map(collection => <div key={collection.id} className="collection-option" onClick={() => {
-                        currentView = <CollectionView id={collection.id} />;
-                    }}><h4>{collection.name}</h4>
+                    {myCollections.map(collection => <div key={collection.id} className="collection-option">
+                        <button onClick={() => {
+                        setCurrentView(<CollectionView id={collection.id} />);
+                    }}>{collection.name}</button>
                     </div>)}
                 </div>
                 <div className="viewer-container">
