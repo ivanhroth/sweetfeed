@@ -14,10 +14,10 @@ export default function EditCollectionForm(props) {
             if (collectionName && collection.name !== collectionName) console.log("change the name in the database");
         }
         retrieveCollection();
-    });
+    }, []);
 
     const [collectionName, setCollectionName] = useState(collection.name)
-    const [collectionFeeds, setCollectionFeeds] = useState([]) //should use the current list of feeds associated with that collection
+    const [collectionFeeds, setCollectionFeeds] = useState([])
     const [currentResults, setCurrentResults] = useState([])
     const [newFeed, setNewFeed] = useState([]);
 
@@ -26,10 +26,9 @@ export default function EditCollectionForm(props) {
         setCollectionFeeds([...collectionFeeds, feed])
     }
 
-    //https://feedsearch.dev/api/v1/search?url
     return <>
     <form>
-        <label for="name">Collection name</label>
+        <label htmlFor="name">Collection name</label>
         <input type="text" value={collectionName} name="name" onChange={e => {
             setCollectionName(e.target.value);
         }}></input>
@@ -44,10 +43,10 @@ export default function EditCollectionForm(props) {
             if (results) setCurrentResults(results);
             else setCurrentResults([]);
         }}>Search feeds</button>
-        <div class="feed-results">
+        <div className="feed-results">
             {currentResults.map(feed => {
-                return <div class="feed-result">
-                    <img src={feed.favicon} /> <span class="feed-name">{feed.title}</span>
+                return <div className="feed-result" key={feed.id}>
+                    <img src={feed.favicon} /> <span className="feed-name">{feed.title}</span>
                 </div>
             })}
         </div>

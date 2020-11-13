@@ -7,7 +7,7 @@ import Login from './components/Login';
 function App() {
 
     const [user, setUser] = useState({})
-    const [myCollections, setMyCollections] = useState([{}]);
+    const [myCollections, setMyCollections] = useState([{name: "", feeds: [], id: 0}]);
 
     useEffect(async () => {
         if (myCollections[0] === {}) {
@@ -41,7 +41,9 @@ function App() {
                     <div class="sidebar-box">
                         <h4>Collections</h4>
                     </div>
-                    {myCollections.map(collection => <div><h4>Collection</h4></div>)}
+                    {myCollections.map(collection => <div key={collection.id}><h4>{collection.name}</h4>
+                    <div>{collection.feeds.map(feed => <></>)}</div>
+                    </div>)}
                 </div>
                 <div class="viewer-container">
                 </div>

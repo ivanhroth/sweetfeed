@@ -14,4 +14,12 @@ def index():
 def user_collections(id):
     user = User.query.filter_by(id=id).one()
     collections = Collection.query.filter_by(user_id=user.id).all()
-    return jsonify(collections)
+    print(collections)
+    return jsonify(list(map(lambda collection: {
+        "name": collection.name,
+        "id": collection.id,
+        "user_id": collection.user_id,
+        "feeds": list(map(lambda feed: {"id": feed.id,
+                                        "name": feed.name,
+                                        "url": feed.url}, collection.feeds))
+    }, collections)))
