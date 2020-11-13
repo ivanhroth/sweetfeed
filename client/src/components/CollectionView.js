@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import NewsItem from './NewsItem';
 
 const FEEDS_CONTENT = 'FEEDS_CONTENT';
 

@@ -82,3 +82,8 @@ input {
     flex-direction: column;
     width: 50%;
 }
+
+.item-box {
+    background-color: grey;
+    margin: 10px;
+}
