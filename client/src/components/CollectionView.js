@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import NewsItem from './NewsItem';
 
 const FEEDS_CONTENT = 'FEEDS_CONTENT';
 
@@ -29,9 +30,14 @@ export default function CollectionView(props) {
 
     return <>
             {feedsContent.map((item, i) => {
-                return <div className="news-item" key={i}>
-                        {item.title}
-                       </div>
+                console.log(item);
+                return <div className="item-box">
+                    <div className="item-header"><a href={item.link}>{item.title}</a></div>
+                    <div className="item-byline">by {item.author} at {item.published}</div>
+                    <div className="item-contents">
+                    <p>{item.summary}</p>
+                </div>
+            </div>
             })}
            </>
 }

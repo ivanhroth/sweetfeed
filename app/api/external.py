@@ -10,6 +10,7 @@ external_routes = Blueprint('external', __name__)
 def search_feed(domain):
     r = req.get('https://feedsearch.dev/api/v1/search?url=' + domain)
     r.raise_for_status()
+    print(r.json())
     return {"feeds": r.json()}
 
 
