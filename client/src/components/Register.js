@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-const NONMATCHING_PASSWORDS = "Password fields do not match."
+const NONMATCHING_PASSWORDS = "Password fields do not match.";
+const FILL_OUT_ALL_FIELDS = "All fields must be filled out.";
 
 const Register = () => {
 
@@ -12,11 +13,17 @@ const Register = () => {
     const tryRegistration = async () => {
         if (password !== passwordConfirm) {
             if (!errors.includes(NONMATCHING_PASSWORDS)) setErrors([...errors, NONMATCHING_PASSWORDS]);
+        } else if (!password || !username || !passwordConfirm) {
+            if (!errors.includes(FILL_OUT_ALL_FIELDS)) setErrors([...errors, FILL_OUT_ALL_FIELDS])
         } else {
             const res = await fetch(`/api/register`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
+                },
+                body: {
+                    username: username,
+                    password: password
                 }
             });
             const outcome = await res.json();
