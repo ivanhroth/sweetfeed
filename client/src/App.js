@@ -29,8 +29,8 @@ function App() {
         <BrowserRouter>
             <nav>
                 <ul>
-                    <li><NavLink to="/" activeclass="active">Home</NavLink></li>
-                    <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                    <li><NavLink to="/" exact activeclass="active">Home</NavLink></li>
+                    <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
                 </ul>
             </nav>
             <Switch>

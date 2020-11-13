@@ -17,6 +17,10 @@ nav ul li a:hover {
     color: black;
 }
 
+.active {
+    color: black;
+}
+
 button {
     background-color: tan;
     border-radius: 15%;
