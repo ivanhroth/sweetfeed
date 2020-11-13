@@ -11,5 +11,7 @@ def get_collection(id):
         "name": collection.name,
         "id": collection.id,
         "user_id": collection.user_id,
-        "feeds": collection.feeds
+        "feeds": list(map(lambda feed: {"id": feed.id,
+                                        "name": feed.name,
+                                        "url": feed.url}, collection.feeds))
     })
