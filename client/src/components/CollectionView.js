@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default CollectionView(collectionId) {
+export default function CollectionView(collectionId) {
 
     useEffect(() => {
         async function retrieveCollection() {
