@@ -10,3 +10,9 @@ def search_feed(domain):
     r = req.get('https://feedsearch.dev/api/v1/search?url=' + domain)
     r.raise_for_status()
     return {"feeds": r.json()}
+
+
+@external_routes.route('/feedcontent/<int:id>')
+def retrieve_feed_content(id):
+    feed = Feed.query.filter(id=id).one()
+    feed_url = feed.url
