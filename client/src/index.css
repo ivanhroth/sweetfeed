@@ -63,9 +63,12 @@ input {
     width: 100%;
     background-color: salmon;
     color: white;
+    text-align: center;
+    cursor: pointer;
 }
 
 .edit-collection-form {
     display: flex;
     flex-direction: column;
+    width: 50%;
 }
