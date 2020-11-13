@@ -48,7 +48,6 @@ function App() {
                 </Route>
 
                 <Route path="/">
-                    <h1>Home</h1>
                     <div className="main-container">
                 <div className="sidebar">
                     <div className="sidebar-box">
