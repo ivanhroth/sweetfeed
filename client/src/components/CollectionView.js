@@ -19,7 +19,9 @@ export default function CollectionView(collectionId) {
 
     const loadFeedsContent = async () => {
         for (let i=0; i < currentCollection.feeds.length; i++){
-
+            const res = await fetch(`/api/feedcontent/${feed.id}`);
+            const feedContent = await res.json();
+            feedsContent = [...feedsContent, feedContent]; // will have to be sorted by timestamp later
         }
     }
 
