@@ -8,6 +8,7 @@ function App() {
 
     const [user, setUser] = useState({})
     const [myCollections, setMyCollections] = useState([{name: "", feeds: [], id: 0}]);
+    const [currentCollectionId, setCurrentCollectionId] = useState(0);
 
     useEffect(async () => {
         if (myCollections[0] === {}) {
@@ -36,16 +37,16 @@ function App() {
 
                 <Route path="/">
                     <h1>My Home Page</h1>
-                    <div class="main-container">
-                <div class="sidebar">
-                    <div class="sidebar-box">
+                    <div className="main-container">
+                <div className="sidebar">
+                    <div className="sidebar-box">
                         <h4>Collections</h4>
                     </div>
                     {myCollections.map(collection => <div key={collection.id}><h4>{collection.name}</h4>
                     <div>{collection.feeds.map(feed => <></>)}</div>
                     </div>)}
                 </div>
-                <div class="viewer-container">
+                <div className="viewer-container">
                 </div>
             </div>
                 </Route>

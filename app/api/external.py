@@ -15,6 +15,6 @@ def search_feed(domain):
 
 @external_routes.route('/feedcontent/<int:id>')
 def retrieve_feed_content(id):
-    feed = Feed.query.filter(id=id).one()
+    feed = Feed.query.filter_by(id=id).one()
     feed_url = feed.url
     return jsonify(feedparser.parse(feed_url))

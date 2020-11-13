@@ -8,17 +8,19 @@ export default function CollectionView(props) {
         async function retrieveCollection() {
             if (currentCollection.id === 0){
                 const res = await fetch(`/collections/${props.id}`);
-                collection = await res.json();
+                const collection = await res.json();
                 setCurrentCollection(collection)
             }
         }
         async function loadFeedsContent() {
             for (let i=0; i < currentCollection.feeds.length; i++){
                 const feed = currentCollection.feeds[i];
-                const res = await fetch(`/api/feedcontent/${feed.id}`);
+                const res = await fetch(`/feedcontent/${feed.id}`);
                 const feedObj = await res.json();
                 const feedContent = feedObj.entries;
-                setFeedsContent([...feedsContent, feedContent]);
+                for (let i=0; i < feedContent.length; i++){
+                    if (!feedsContent.includes(feedContent[i])) setFeedsContent([...feedsContent, feedContent[i]]);
+                }
             }
         }
         retrieveCollection();

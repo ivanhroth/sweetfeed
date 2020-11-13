@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import EditCollectionForm from './EditCollectionForm';
+import CollectionView from './CollectionView';
 
 import User from './User';
 
@@ -15,11 +16,13 @@ function UsersList (props) {
         fetchData();
     }, []);
 
+
     const userComponents = users.map((user) => <User key={user.id} user={user} />)
     return (
         <>
             <h1>User List: </h1>
             {userComponents}
+            <CollectionView id="1" />
             <EditCollectionForm id="1" />
         </>
         );
