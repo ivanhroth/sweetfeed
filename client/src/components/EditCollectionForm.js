@@ -33,7 +33,8 @@ export default function EditCollectionForm(props) {
         }}></input><button onClick={async e => {
             e.preventDefault();
             const searchRes = await fetch(`/feedsearch/${newFeed}`);
-            const results = await searchRes.json();
+            const resultsObj = await searchRes.json();
+            const results = resultsObj.feeds;
             setCurrentResults(results);
         }}>Search feeds</button>
         <div class="feed-results">
