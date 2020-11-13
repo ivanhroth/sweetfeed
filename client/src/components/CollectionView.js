@@ -18,9 +18,6 @@ export default function CollectionView(props) {
                     const feed = collection.feeds[i];
                     const res = await fetch(`/feedcontent/${feed.id}`);
                     const feedObj = await res.json();
-                    /* feedObj.entries.forEach(entry => {
-                        if (!feedsContent.includes(entry)) setFeedsContent([...feedsContent, entry]);
-                    }) */
                     setFeedsContent([...feedsContent, ...feedObj.entries].sort((item1, item2) => item1.pubDate - item2.pubDate))
                 }
                 localStorage.setItem(FEEDS_CONTENT, JSON.stringify(feedsContent));
@@ -28,12 +25,8 @@ export default function CollectionView(props) {
         }
 
         retrieveCollection();
-        // if ((currentCollection.id !== 0) && (feedsContent.length === 0)){
-        //     loadFeedsContent();
-        // }
     }, [currentCollection]);
 
-    //console.log(feedsContent);
     return <>
             {feedsContent.map((item, i) => {
                 return <div className="news-item" key={i}>
