@@ -43,7 +43,7 @@ export default function EditCollectionForm(props) {
             const results = resultsObj.feeds;
             if (results) setCurrentResults(results);
             else setCurrentResults([]);
-        }}>Search feeds</button>
+        }}>Add feed</button>
         <div className="feed-results">
             {currentResults.map(feed => {
                 return <div className="feed-result" key={feed.id}>

@@ -84,6 +84,16 @@ input {
 }
 
 .item-box {
-    background-color: grey;
-    margin: 10px;
+    background-color: lightgrey;
+    margin: 5px 10px;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.item-box div {
+    background-color: inherit;
+}
+
+.edit-button {
+    font-size: 75%;
 }
