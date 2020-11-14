@@ -4,6 +4,7 @@ import UserList from './components/UsersList';
 import Login from './components/Login';
 import Register from './components/Register';
 import CollectionView from './components/CollectionView';
+import EditCollectionForm from './components/EditCollectionForm';
 
 
 function App() {
@@ -56,7 +57,9 @@ function App() {
                     {myCollections.map(collection => <div key={collection.id} className="collection-option">
                         <span onClick={() => {
                         setCurrentView(<CollectionView id={collection.id} />);
-                    }}>{collection.name}</span>
+                    }}>{collection.name}</span> <span className="edit-button" onClick={() => {
+                        setCurrentView(<EditCollectionForm id={collection.id} />)
+                    }}>(edit)</span>
                     </div>)}
                 </div>
                 <div className="viewer-container">
