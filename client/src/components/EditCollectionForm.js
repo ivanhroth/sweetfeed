@@ -28,13 +28,11 @@ export default function EditCollectionForm(props) {
 
     return <>
     <form className="edit-collection-form">
-        <label htmlFor="name">Collection name</label>
-        <input type="text" value={collectionName} name="name" onChange={e => {
+        <input type="text" value={collectionName} placeholder="Collection name" name="name" onChange={e => {
             setCollectionName(e.target.value);
         }}></input>
 
-        <label htmlFor="url">Enter URL</label>
-        <input type="text" value={newFeed} name="url" onChange={e => {
+        <input type="text" value={newFeed} name="url" placeholder="Enter URL" onChange={e => {
             setNewFeed(e.target.value)
         }}></input><button onClick={async e => {
             e.preventDefault();
