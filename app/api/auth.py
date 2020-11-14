@@ -19,7 +19,7 @@ def signup():
 
     try:
         db.session.commit()
-    except IntegrityError:
+    except:
         return jsonify(message='User already exists'), 409
 
     token = create_access_token(identity=user.username)
