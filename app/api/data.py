@@ -1,5 +1,5 @@
-from flask import Blueprint, jsonify
-from app.models import Collection, Feed
+from flask import Blueprint, jsonify, request
+from app.models import db, Collection, Feed
 
 data_routes = Blueprint('data', __name__)
 
@@ -21,7 +21,7 @@ def get_collection(id):
 def add_feed(id):
     feed = request.get_json()
     current_collection = Collection.query.filter_by(id=id).one()
-    new_feed = Feed(name=feed.name, url=feed.url)
+    new_feed = Feed(name=feed['title'], url=feed['url'])
     current_collection.feeds.append(new_feed)
     db.session.add(new_feed)
-    db.commit()
+    db.session.commit()
