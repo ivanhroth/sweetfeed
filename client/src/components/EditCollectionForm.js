@@ -45,7 +45,7 @@ export default function EditCollectionForm(props) {
             <div className="collection-name-container"><input type="text" value={collectionName} className="collection-name-field" placeholder="Collection name" name="name" onChange={e => {
                 setCollectionName(e.target.value);
             }}></input>
-            <button onClick={() => saveTitle(collectionName)}>save sitle</button>
+            <button onClick={() => saveTitle(collectionName)}>save title</button>
             </div>
 
         {collectionFeeds.map(feed => <div>{feed.name}</div>)}
@@ -63,7 +63,10 @@ export default function EditCollectionForm(props) {
             <div className="feed-results">
                 {currentResults.map(feed => {
                     return <div className="feed-result" key={feed.id}>
-                        <img src={feed.favicon} /> <span className="feed-name">{feed.title}</span> <button onClick={() => updateCollectionFeeds(feed)}>Add to collection</button>
+                        <img src={feed.favicon} /> <span className="feed-name">{feed.title}</span> <button onClick={e => {
+                            e.preventDefault();
+                            updateCollectionFeeds(feed)}
+                            }>Add to collection</button>
                     </div>
                 })}
             </div>
