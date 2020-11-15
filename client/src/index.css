@@ -97,3 +97,9 @@ input {
 .edit-button {
     font-size: 75%;
 }
+
+.collection-name-field {
+    font-size: 200%;
+    background-color: inherit;
+    border: 0px;
+}

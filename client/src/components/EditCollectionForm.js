@@ -2,18 +2,22 @@ import React, { useEffect, useState } from 'react';
 
 export default function EditCollectionForm(props) {
 
-    let collection = {name: ""};
+    const [collection, setCollection] = useState({name: ""});
 
     async function retrieveCollection() {
         const res = await fetch(`/collections/${props.id}`);
-        collection = await res.json();
+        const retrievedCollection = await res.json();
+        if (retrievedCollection.id !== collection.id){
+            setCollection(retrievedCollection);
+        }
         if (collectionFeeds === [] && collection.feeds) setCollectionFeeds(collection.feeds);
         if (collectionName && collection.name !== collectionName) console.log("change the name in the database");
     }
 
     useEffect(() => {
         retrieveCollection();
-    }, []);
+        if (collectionName === "") setCollectionName(collection.name);
+    }, [collection]);
 
     const [collectionName, setCollectionName] = useState(collection.name)
     const [collectionFeeds, setCollectionFeeds] = useState([])
@@ -28,29 +32,32 @@ export default function EditCollectionForm(props) {
         setCollectionFeeds([...collectionFeeds, feed])
     }
 
-    return <>
-    <form className="edit-collection-form">
-        <input type="text" value={collectionName} placeholder="Collection name" name="name" onChange={e => {
-            setCollectionName(e.target.value);
-        }}></input>
+    console.log(collection);
+    console.log(collectionName);
 
-        <input type="text" value={newFeed} name="url" placeholder="Enter URL" onChange={e => {
-            setNewFeed(e.target.value)
-        }}></input><button onClick={async e => {
-            e.preventDefault();
-            const searchRes = await fetch(`/feedsearch/${newFeed}`);
-            const resultsObj = await searchRes.json();
-            const results = resultsObj.feeds;
-            if (results) setCurrentResults(results);
-            else setCurrentResults([]);
-        }}>Add feed</button>
-        <div className="feed-results">
-            {currentResults.map(feed => {
-                return <div className="feed-result" key={feed.id}>
-                    <img src={feed.favicon} /> <span className="feed-name">{feed.title}</span> <button onClick={() => updateCollectionFeeds(feed)}>Add to collection</button>
-                </div>
-            })}
-        </div>
-    </form>
+    return <>
+        <form className="edit-collection-form">
+            <input type="text" value={collectionName} className="collection-name-field" placeholder="Collection name" name="name" onChange={e => {
+                setCollectionName(e.target.value);
+            }}></input>
+
+            <input type="text" value={newFeed} name="url" placeholder="Enter URL" onChange={e => {
+                setNewFeed(e.target.value)
+            }}></input><button onClick={async e => {
+                e.preventDefault();
+                const searchRes = await fetch(`/feedsearch/${newFeed}`);
+                const resultsObj = await searchRes.json();
+                const results = resultsObj.feeds;
+                if (results) setCurrentResults(results);
+                else setCurrentResults([]);
+            }}>Add feed</button>
+            <div className="feed-results">
+                {currentResults.map(feed => {
+                    return <div className="feed-result" key={feed.id}>
+                        <img src={feed.favicon} /> <span className="feed-name">{feed.title}</span> <button onClick={() => updateCollectionFeeds(feed)}>Add to collection</button>
+                    </div>
+                })}
+            </div>
+        </form>
     </>
 }
