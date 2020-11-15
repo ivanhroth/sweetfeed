@@ -15,3 +15,13 @@ def get_collection(id):
                                         "name": feed.name,
                                         "url": feed.url}, collection.feeds))
     })
+
+
+@data_routes.route('/collections/<int:id>/addfeed', methods=['PUT'])
+def add_feed(id):
+    feed = request.get_json()
+    current_collection = Collection.query.filter_by(id=id).one()
+    new_feed = Feed(name=feed.name, url=feed.url)
+    current_collection.feeds.append(new_feed)
+    db.session.add(new_feed)
+    db.commit()

@@ -25,11 +25,16 @@ export default function EditCollectionForm(props) {
     const [newFeed, setNewFeed] = useState([]);
 
     const updateCollectionFeeds = async feed => {
-        const rest = await fetch(`/collections/${props.id}/addfeed`,
+        const res = await fetch(`/collections/${props.id}/addfeed`,
                                   { method: 'PUT',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify(feed) });
+        // check
         setCollectionFeeds([...collectionFeeds, feed])
+    }
+
+    const saveTitle = async title => {
+        const res = await fetch(`/`); // TBD
     }
 
     console.log(collection);
@@ -37,9 +42,13 @@ export default function EditCollectionForm(props) {
 
     return <>
         <form className="edit-collection-form">
-            <input type="text" value={collectionName} className="collection-name-field" placeholder="Collection name" name="name" onChange={e => {
+            <div className="collection-name-container"><input type="text" value={collectionName} className="collection-name-field" placeholder="Collection name" name="name" onChange={e => {
                 setCollectionName(e.target.value);
             }}></input>
+            <button onClick={() => saveTitle(collectionName)}>save sitle</button>
+            </div>
+
+        {collectionFeeds.map(feed => <div>{feed.name}</div>)}
 
             <input type="text" value={newFeed} name="url" placeholder="Enter URL" onChange={e => {
                 setNewFeed(e.target.value)
@@ -50,7 +59,7 @@ export default function EditCollectionForm(props) {
                 const results = resultsObj.feeds;
                 if (results) setCurrentResults(results);
                 else setCurrentResults([]);
-            }}>Add feed</button>
+            }}>Find</button>
             <div className="feed-results">
                 {currentResults.map(feed => {
                     return <div className="feed-result" key={feed.id}>
