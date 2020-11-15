@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Redirect, useHistory } from 'react-router';
 
+const SWEETFEED_JWT_TOKEN = "SWEETFEED_JWT_TOKEN"
+
 const validateForm = () => true;
 
 const Login = props => {
@@ -17,7 +19,11 @@ const Login = props => {
             body: { username, password }
         });
 
-        if (loginAttempt.status === 200) history.push('/');
+        if (loginAttempt.status === 200) {
+            const { user, token } = await loginAttempt.json();
+            localStorage.setItem(SWEETFEED_JWT_TOKEN, token);
+            history.push('/');
+        }
         else console.error(loginAttempt.msg);
     }
       };

@@ -4,15 +4,14 @@ export default function EditCollectionForm(props) {
 
     let collection = {name: ""};
 
-    //const retrieveCollection =
+    async function retrieveCollection() {
+        const res = await fetch(`/collections/${props.id}`);
+        collection = await res.json();
+        if (collectionFeeds === [] && collection.feeds) setCollectionFeeds(collection.feeds);
+        if (collectionName && collection.name !== collectionName) console.log("change the name in the database");
+    }
 
     useEffect(() => {
-        async function retrieveCollection() {
-            const res = await fetch(`/collections/${props.id}`);
-            collection = await res.json();
-            if (collectionFeeds === [] && collection.feeds) setCollectionFeeds(collection.feeds);
-            if (collectionName && collection.name !== collectionName) console.log("change the name in the database");
-        }
         retrieveCollection();
     }, []);
 
