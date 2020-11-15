@@ -19,7 +19,7 @@ nav ul {
 }
 
 nav ul li a {
-    color: gray;
+    color: salmon;
     text-decoration: none;
 }
 
@@ -28,7 +28,7 @@ nav ul li a:hover {
 }
 
 .active {
-    color: salmon;
+    color: gray;
 }
 
 button {
