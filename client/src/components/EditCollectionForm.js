@@ -20,8 +20,11 @@ export default function EditCollectionForm(props) {
     const [currentResults, setCurrentResults] = useState([])
     const [newFeed, setNewFeed] = useState([]);
 
-    const updateCollectionFeeds = feed => {
-        // add the feed to the collection in the database
+    const updateCollectionFeeds = async feed => {
+        const rest = await fetch(`/collections/${props.id}/addfeed`,
+                                  { method: 'PUT',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify(feed) });
         setCollectionFeeds([...collectionFeeds, feed])
     }
 
@@ -44,7 +47,7 @@ export default function EditCollectionForm(props) {
         <div className="feed-results">
             {currentResults.map(feed => {
                 return <div className="feed-result" key={feed.id}>
-                    <img src={feed.favicon} /> <span className="feed-name">{feed.title}</span>
+                    <img src={feed.favicon} /> <span className="feed-name">{feed.title}</span> <button onClick={() => updateCollectionFeeds(feed)}>Add to collection</button>
                 </div>
             })}
         </div>
