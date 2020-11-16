@@ -49,7 +49,7 @@ function App() {
         } else {
             retrieveCollections();
         }
-    })
+    }, [user.id])
 
     console.log(user);
 
