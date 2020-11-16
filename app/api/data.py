@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, redirect, url_for
 from app.models import db, Collection, Feed
 
 data_routes = Blueprint('data', __name__)
@@ -26,3 +26,12 @@ def add_feed(id):
     db.session.add(new_feed)
     db.session.commit()
     return jsonify({"msg": "Success"})
+
+
+@data_routes.route('/collections/<int:id>/editname', methods=['PUT'])
+def edit_name(id):
+    name = request.get_json()['name']
+    current_collection = Collection.query.filter_by(id=id).one()
+    current_collection.name = name
+    db.session.commit()
+    return redirect(url_for('data.get_collection', id=id))

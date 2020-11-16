@@ -34,7 +34,12 @@ export default function EditCollectionForm(props) {
     }
 
     const saveTitle = async title => {
-        const res = await fetch(`/`); // TBD
+        const res = await fetch(`/collections/${props.id}/editname`,
+                                { method: 'PUT',
+                                  headers: { 'Content-Type': 'application/json'},
+                                  body: JSON.stringify({name: collectionName })});
+        const newCollection = await res.json();
+        setCollection(newCollection);
     }
 
     console.log(collection);
@@ -45,7 +50,10 @@ export default function EditCollectionForm(props) {
             <div className="collection-name-container"><input type="text" value={collectionName} className="collection-name-field" placeholder="Collection name" name="name" onChange={e => {
                 setCollectionName(e.target.value);
             }}></input>
-            <button onClick={() => saveTitle(collectionName)}>save title</button>
+            <button onClick={e => {
+                e.preventDefault();
+                saveTitle(collectionName);
+                }}>save title</button>
             </div>
 
         {collectionFeeds.map(feed => <div>{feed.name}</div>)}
