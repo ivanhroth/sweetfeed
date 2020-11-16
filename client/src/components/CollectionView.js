@@ -14,12 +14,15 @@ export default function CollectionView(props) {
                 const collection = await res.json();
                 setCurrentCollection(collection)
 
+                let newFeedsContent = feedsContent;
+
                 for (let i=0; i < collection.feeds.length; i++){
                     const feed = collection.feeds[i];
                     const res = await fetch(`/feedcontent/${feed.id}`);
                     const feedObj = await res.json();
-                    setFeedsContent([...feedsContent, ...feedObj.entries].sort((item1, item2) => ((new Date(item2.published)) - new Date(item1.published))));
+                    newFeedsContent = [...newFeedsContent, ...feedObj.entries].sort((item1, item2) => ((new Date(item2.published)) - new Date(item1.published)));
                 }
+                setFeedsContent(newFeedsContent);
             }
         }
 
