@@ -57,7 +57,7 @@ export default function EditCollectionForm(props) {
                 }}>save title</button>
             </div>
 
-            {collection.feeds.map(feed => <div className="feed-list-item">{feed.name} <button>remove feed</button></div>)}
+            {collection.feeds.map(feed => <div className="feed-list-item collection-option">{feed.name} <button>remove feed</button></div>)}
 
             <input type="text" value={newFeed} name="url" placeholder="Enter URL" onChange={e => {
                 setNewFeed(e.target.value);
