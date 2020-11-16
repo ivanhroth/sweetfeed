@@ -33,7 +33,7 @@ nav ul li a:hover {
 
 button {
     background-color: tan;
-    border-radius: 15%;
+    border-radius: 10px;
     border: 1px solid salmon;
 }
 
