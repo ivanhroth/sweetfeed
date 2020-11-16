@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from app.models import User, Collection
+from app.models import db, User, Collection
 
 user_routes = Blueprint('users', __name__)
 
@@ -29,3 +29,11 @@ def user_collections(id):
                                         "name": feed.name,
                                         "url": feed.url}, collection.feeds))
     }, collections)))
+
+
+@user_routes.route('/<int:id>/addcollection')
+def add_collection(id):
+    new_collection = Collection(name="Untitled Collection", user_id=id)
+    db.session.add(new_collection)
+    db.session.commit()
+    return jsonify({ "name": new_collection.name }) #maybe we should actually retrieve the new row and return that dictified and jsonified
