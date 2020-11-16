@@ -88,9 +88,11 @@ function App() {
                                 setCurrentView(<EditCollectionForm id={collection.id} />)
                                 }}>(edit)</span>
                         </div>)})}
-                        <button className="add-collection-button" onClick={e => {
+                        <button className="add-collection-button" onClick={async e => {
                             e.preventDefault();
-                            const newId = 100; // replace this line with creating a new collection and giving it the id 'newId'
+                            const newCollectionRes = await fetch(`/api/users/${user.id}/addcollection`);
+                            const newCollection = await newCollectionRes.json();
+                            const newId = newCollection.id;
                             setCurrentView(<EditCollectionForm id={newId} />)
                         }}>Create a new collection</button>
                         </div>
