@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify
 from app.models import db, User, Collection
+from sqlalchemy import desc
 
 user_routes = Blueprint('users', __name__)
 
@@ -38,5 +39,5 @@ def add_collection(id):
     db.session.commit()
     new_row = Collection.query \
                         .filter_by(name=new_collection.name) \
-                        .order_by(Collection.id, desc()).one()
+                        .order_by(desc(Collection.id)).first()
     return jsonify({"name": new_row.name, "id": new_row.id})

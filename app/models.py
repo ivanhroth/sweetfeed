@@ -31,8 +31,8 @@ class User(db.Model):
 class Collection(db.Model):
     __tablename__ = 'collections'
 
-    id = db.Column(db.Integer, db.ForeignKey("users.id"), primary_key=True)
-    user_id = db.Column(db.Integer)
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     name = db.Column(db.String(140))
 
     owner = db.relationship("User")

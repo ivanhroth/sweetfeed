@@ -35,3 +35,12 @@ def edit_name(id):
     current_collection.name = name
     db.session.commit()
     return redirect(url_for('data.get_collection', id=id))
+
+
+@data_routes.route('/collections/<int:id>/removefeed/<int:feedid>')
+def remove_feed(id, feedid):
+    collection = Collection.query.filter_by(id=id).one()
+    feed = Feed.query.filter_by(id=feedid).one()
+    collection.feeds.remove(feed)
+    db.session.commit()
+    return jsonify(collection.feeds)
