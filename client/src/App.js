@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Switch, Route, NavLink, useHistory } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, NavLink, useHistory, Redirect } from 'react-router-dom';
 import Login, { SWEETFEED_JWT_TOKEN } from './components/Login';
 import Register from './components/Register';
 import CollectionView from './components/CollectionView';
@@ -26,14 +26,13 @@ function App() {
     }
 
     const retrieveUser = async () => {
-        try {
             const tokenParsed = getUserFromToken(localStorage.getItem(SWEETFEED_JWT_TOKEN))
             const res = await fetch(`/api/users/${tokenParsed.identity}`);
+            console.log(res);
+            if (res.status === 500) setUser({...user, triedRetrieving: true})
             const currentUser = await res.json();
             setUser(currentUser);
-        } catch {
-            history.push('/login')
-        }
+            return {};
     }
 
     const logOut = () => {
@@ -45,7 +44,8 @@ function App() {
 
     useEffect(() => {
         if (user.id === 0){
-            retrieveUser()
+            const retrieveUserResult = retrieveUser();
+            if (retrieveUserResult.error) history.push('/login');
         } else {
             retrieveCollections();
         }
@@ -72,6 +72,7 @@ function App() {
                 </Route>
 
                 <Route path="/">
+                    {(user.id === 0 && user.triedRetrieving) ? <Redirect to='/login' /> : <></>}
                     <div className="main-container">
                         <div className="sidebar">
                             <div className="sidebar-box">
