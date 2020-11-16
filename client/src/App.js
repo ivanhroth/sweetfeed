@@ -77,7 +77,7 @@ function App() {
                     <div className="main-container">
                         <div className="sidebar">
                             <div className="sidebar-box">
-                                <h4>Collections</h4>
+                                <div className="collections-header">Collections</div>
                             </div>
                         {myCollections.map(collection =>{
                         if (collection.id !== 0) return (

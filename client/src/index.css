@@ -36,6 +36,7 @@ button {
     background-color: bisque;
     border-radius: 10px;
     border: 1px solid salmon;
+    color: gray;
 }
 
 input {
@@ -115,4 +116,11 @@ input {
 
 .feed-list-item {
     margin: 3px 0px;
+}
+
+.collections-header {
+    text-align: center;
+    color: gray;
+    font-size: 120%;
+    margin-bottom: 5px;
 }
