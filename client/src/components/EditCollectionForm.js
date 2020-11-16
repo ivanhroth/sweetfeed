@@ -51,10 +51,12 @@ export default function EditCollectionForm(props) {
         {collectionFeeds.map(feed => <div>{feed.name}</div>)}
 
             <input type="text" value={newFeed} name="url" placeholder="Enter URL" onChange={e => {
-                setNewFeed(e.target.value)
+                setNewFeed(e.target.value);
             }}></input><button onClick={async e => {
                 e.preventDefault();
-                const searchRes = await fetch(`/feedsearch/${newFeed}`);
+                let cleanedURL = newFeed;
+                if (cleanedURL.includes('http:') || cleanedURL.includes('https:')) cleanedURL = cleanedURL.split('/').slice(2).join('/');
+                const searchRes = await fetch(`/feedsearch/${cleanedURL}`);
                 const resultsObj = await searchRes.json();
                 const results = resultsObj.feeds;
                 if (results) setCurrentResults(results);
