@@ -86,7 +86,10 @@ function App() {
                                     setCurrentView(<CollectionView id={collection.id} />);
                                 }}>{collection.name}</span> <span className="edit-button" onClick={() => {
                                 setCurrentView(<EditCollectionForm id={collection.id} />)
-                                }}>(edit)</span>
+                                }}>(edit)</span> <span className="edit-button" onClick={async () => {
+                                    await fetch(`/collections/${collection.id}/remove`);
+                                    setMyCollections(myCollections.filter(c => c !== collection));
+                                }}>(remove)</span>
                         </div>)})}
                         <button className="add-collection-button" onClick={async e => {
                             e.preventDefault();

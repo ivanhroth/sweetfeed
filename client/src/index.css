@@ -8,6 +8,7 @@ body {
 
 div {
     background-color: beige;
+    border-radius: 10px;
 }
 
 nav ul {
@@ -75,6 +76,7 @@ input {
     color: white;
     text-align: center;
     cursor: pointer;
+    margin: 2px 0;
 }
 
 .edit-collection-form {

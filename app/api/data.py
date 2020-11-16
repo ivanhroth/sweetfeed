@@ -44,3 +44,9 @@ def remove_feed(id, feedid):
     collection.feeds.remove(feed)
     db.session.commit()
     return jsonify(collection.feeds)
+
+
+@data_routes.route('/collections/<int:id>/remove')
+def remove_collection(id):
+    Collection.delete().where(students.c.id == id)
+    return jsonify({'msg': 'Success'})
