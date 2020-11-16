@@ -25,3 +25,4 @@ def add_feed(id):
     current_collection.feeds.append(new_feed)
     db.session.add(new_feed)
     db.session.commit()
+    return jsonify({"msg": "Success"})
