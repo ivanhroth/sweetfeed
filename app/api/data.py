@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request, redirect, url_for
 from app.models import db, Collection, Feed
+from sqlalchemy import delete
 
 data_routes = Blueprint('data', __name__)
 
@@ -48,5 +49,7 @@ def remove_feed(id, feedid):
 
 @data_routes.route('/collections/<int:id>/remove')
 def remove_collection(id):
-    Collection.delete().where(students.c.id == id)
+    collection = Collection.query.filter_by(id=id).one()
+    db.session.delete(collection)
+    db.session.commit()
     return jsonify({'msg': 'Success'})
