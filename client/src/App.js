@@ -100,6 +100,7 @@ function App() {
                             const newCollectionRes = await fetch(`/api/users/${user.id}/addcollection`);
                             const newCollection = await newCollectionRes.json();
                             const newId = newCollection.id;
+                            setMyCollections([...myCollections, newCollection]);
                             setCurrentView(<EditCollectionForm id={newId} />)
                         }}>Create a new collection</button>
                         </div>

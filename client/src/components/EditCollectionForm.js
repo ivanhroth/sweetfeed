@@ -21,6 +21,7 @@ export default function EditCollectionForm(props) {
     useEffect(() => {
         retrieveCollection();
         if (collectionName === "") setCollectionName(collection.name);
+        localStorage.removeItem('FEEDS_CONTENT'); // so that outdated feed content is not used
     }, [collection, collectionFeeds]);
 
     const updateCollectionFeeds = async feed => {
@@ -28,7 +29,6 @@ export default function EditCollectionForm(props) {
                                   { method: 'PUT',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify(feed) });
-        // check
         setCollectionFeeds([...collectionFeeds, feed])
     }
 
@@ -58,9 +58,8 @@ export default function EditCollectionForm(props) {
 
             {collection.feeds.map(feed => <div className="feed-list-item collection-option">{feed.name} <button onClick={async e => {
                 e.preventDefault();
-                const removeRes = await fetch(`/collections/${collection.id}/removefeed/${feed.id}`);
-                const newFeeds = await removeRes.json();
-                setCollectionFeeds(newFeeds);
+                await fetch(`/collections/${collection.id}/removefeed/${feed.id}`);
+                setCollectionFeeds(collectionFeeds.filter(f => f !== feed));
             }}>remove feed</button></div>)}
 
             <input type="text" value={newFeed} name="url" placeholder="Enter feed URL" onChange={e => {
