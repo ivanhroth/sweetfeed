@@ -16,7 +16,8 @@ const Login = props => {
         if (formIsValid) {
         const loginAttempt = await fetch(`/session`, {
             method: "PUT",
-            body: { username, password }
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
         });
 
         if (loginAttempt.status === 200) {
