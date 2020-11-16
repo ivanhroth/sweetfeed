@@ -44,7 +44,9 @@ def remove_feed(id, feedid):
     feed = Feed.query.filter_by(id=feedid).one()
     collection.feeds.remove(feed)
     db.session.commit()
-    return jsonify(collection.feeds)
+    return jsonify(list(map(lambda feed: {"id": feed.id,
+                                          "name": feed.name,
+                                          "url": feed.url}, collection.feeds)))
 
 
 @data_routes.route('/collections/<int:id>/remove')

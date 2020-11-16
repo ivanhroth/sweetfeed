@@ -31,8 +31,9 @@ const Register = () => {
         }
     }
 
-    return <>
-            <form>
+    return <div className="login-container">
+            <span className="login-header">Register an account</span>
+            <form className="login-form">
                 <div>
                 <input type="text" onChange={e => setUsername(e.target.value)} value={username} name="username" placeholder="Username" />
                 </div>
@@ -50,7 +51,7 @@ const Register = () => {
                     tryRegistration();
                 }}>Register</button>
             </form>
-           </>
+           </div>
 }
 
 export default Register;
