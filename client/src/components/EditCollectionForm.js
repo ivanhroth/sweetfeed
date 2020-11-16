@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function EditCollectionForm(props) {
 
-    const [collection, setCollection] = useState({name: ""});
+    const [collection, setCollection] = useState({name: "", feeds: []});
 
     async function retrieveCollection() {
         const res = await fetch(`/collections/${props.id}`);
@@ -44,6 +44,7 @@ export default function EditCollectionForm(props) {
 
     console.log(collection);
     console.log(collectionName);
+    console.log(collection.feeds);
 
     return <>
         <form className="edit-collection-form">
@@ -56,7 +57,7 @@ export default function EditCollectionForm(props) {
                 }}>save title</button>
             </div>
 
-        {collectionFeeds.map(feed => <div>{feed.name}</div>)}
+        {collection.feeds.map(feed => <div>{feed.name}</div>)}
 
             <input type="text" value={newFeed} name="url" placeholder="Enter URL" onChange={e => {
                 setNewFeed(e.target.value);
