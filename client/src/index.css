@@ -143,3 +143,14 @@ input {
 .login-container * {
     margin: 0 auto;
 }
+
+.feed-results {
+    font-size: 80%;
+    overflow: auto;
+    height: 10%;
+}
+
+.feed-results div {
+    background-color: gainsboro;
+    margin: 3px 0;
+}
