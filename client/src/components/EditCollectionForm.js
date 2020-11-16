@@ -22,7 +22,7 @@ export default function EditCollectionForm(props) {
     useEffect(() => {
         retrieveCollection();
         if (collectionName === "") setCollectionName(collection.name);
-        localStorage.removeItem('FEEDS_CONTENT'); // so that outdated feed content is not used
+        //localStorage.removeItem('FEEDS_CONTENT'); // so that outdated feed content is not used
     }, [collection, collectionFeeds]);
 
     const updateCollectionFeeds = async feed => {
