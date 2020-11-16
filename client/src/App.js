@@ -61,7 +61,7 @@ function App() {
         <BrowserRouter>
             <nav>
                 <ul>
-                    <li><NavLink to="/" exact activeclass="active">Home</NavLink></li>
+                    <li><NavLink to="/" exact activeclass="active"><img className="logo" src="/logo.png" /></NavLink></li>
                     {!user.id ? <li><NavLink to="/login" activeclass="active">Log in</NavLink> or <NavLink to="/register" activeclass="active">Register an account</NavLink></li> : <li><NavLink to='/login' activeclass='active' onClick={logOut}>Log out</NavLink></li>}
                 </ul>
             </nav>

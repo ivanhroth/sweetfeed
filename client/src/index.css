@@ -153,3 +153,7 @@ input {
     background-color: gainsboro;
     margin: 3px 0;
 }
+
+.logo {
+    max-height: 17px;
+}
