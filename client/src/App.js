@@ -37,7 +37,7 @@ function App() {
 
     const logOut = () => {
         localStorage.removeItem(SWEETFEED_JWT_TOKEN);
-        setUser({});
+        setUser({ id: 0 });
         setCurrentCollectionId(0);
         setCurrentView(<></>);
     }
@@ -88,6 +88,11 @@ function App() {
                                 setCurrentView(<EditCollectionForm id={collection.id} />)
                                 }}>(edit)</span>
                         </div>)})}
+                        <button className="add-collection-button" onClick={e => {
+                            e.preventDefault();
+                            const newId = 100; // replace this line with creating a new collection and giving it the id 'newId'
+                            setCurrentView(<EditCollectionForm id={newId} />)
+                        }}>Create a new collection</button>
                         </div>
                         <div className="viewer-container">
                             {currentView}
