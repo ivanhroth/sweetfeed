@@ -14,10 +14,10 @@ const Login = props => {
     const tryLogin = async () => {
         const formIsValid = validateForm();
         if (formIsValid) {
-        const loginAttempt = await fetch(`/session`, {
-            method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
+            const loginAttempt = await fetch(`/session`, {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
         });
 
         if (loginAttempt.status === 200) {
@@ -36,10 +36,10 @@ const Login = props => {
         <h2>Log in</h2>
         <form>
             <div>
-            <input onChange={updateUsername} type="username" placeholder="Username" required />
+            <input onChange={e => updateUsername(e.target.value)} type="username" placeholder="Username" required />
             </div>
             <div>
-            <input onChange={updatePassword} type="password" placeholder="Password" required />
+            <input onChange={e => updatePassword(e.target.value)} type="password" placeholder="Password" required />
             </div>
             <div>
             <button onClick={e => {

@@ -30,6 +30,7 @@ def signup():
 def login():
     incoming = request.get_json()
     user = User.query.filter_by(username=incoming['username']).one()
+    print(user)
     if user and \
        check_password_hash(user.hashed_password, incoming['password']):
         token = create_access_token(identity=user.username)
