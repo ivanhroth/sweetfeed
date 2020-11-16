@@ -14,7 +14,7 @@ const Login = props => {
     const tryLogin = async () => {
         const formIsValid = validateForm();
         if (formIsValid) {
-        const loginAttempt = await fetch(`/api/login`, {
+        const loginAttempt = await fetch(`/session`, {
             method: "PUT",
             body: { username, password }
         });
@@ -41,7 +41,10 @@ const Login = props => {
             <input onChange={updatePassword} type="password" placeholder="Password" required />
             </div>
             <div>
-            <button onClick={tryLogin}>Log in</button>
+            <button onClick={e => {
+                e.preventDefault();
+                tryLogin();
+            }}>Log in</button>
             <a href='/register/' id="registration-link">Don't have an account? Click here to register</a>
             </div>
         </form>

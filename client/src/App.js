@@ -9,7 +9,7 @@ import EditCollectionForm from './components/EditCollectionForm';
 
 function App() {
 
-    const getUserFromToken = token => token ? JSON.parse(atob(token.split('.')[1])) : null;
+    const getUserFromToken = token => token ? JSON.parse(atob(token.split('.')[1])) : { id: 0, username: "" };
 
     const [user, setUser] = useState(getUserFromToken(localStorage.getItem(SWEETFEED_JWT_TOKEN)));
     const [myCollections, setMyCollections] = useState([{name: "", feeds: [], id: 0}]);
@@ -18,11 +18,17 @@ function App() {
 
     const retrieveCollections = async () => {
         if (myCollections[0].name === "") {
-            //const res = await fetch(`/users/${user.id}/collections`);
-            const res = await fetch(`/api/users/1/collections`); // for testing purposes only
+            const res = await fetch(`/users/${user.id}/collections`);
             const collections = await res.json();
             setMyCollections(collections);
         }
+    }
+
+    const logOut = () => {
+        localStorage.removeItem(SWEETFEED_JWT_TOKEN);
+        setUser({});
+        setCurrentCollectionId(0);
+        setCurrentView(<></>)
     }
 
     useEffect(() => {
@@ -34,7 +40,7 @@ function App() {
             <nav>
                 <ul>
                     <li><NavLink to="/" exact activeclass="active">Home</NavLink></li>
-                    {user ? <li><NavLink to="/login" activeclass="active">Log in</NavLink> or <NavLink to="/register" activeclass="active">Register an account</NavLink></li> : <></>}
+                    {user ? <li><NavLink to="/login" activeclass="active">Log in</NavLink> or <NavLink to="/register" activeclass="active">Register an account</NavLink></li> : <NavLink to='/login' activeclass='active' onClick={logOut}>Log out</NavLink>}
                 </ul>
             </nav>
             <Switch>
