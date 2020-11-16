@@ -1,4 +1,3 @@
-/* TODO Add site wide styles */
 
 body {
     background-color: beige;
@@ -147,7 +146,7 @@ input {
 .feed-results {
     font-size: 80%;
     overflow: auto;
-    height: 10%;
+    max-height: 500px;
 }
 
 .feed-results div {
