@@ -20,12 +20,13 @@ export default function CollectionView(props) {
                     const feedObj = await res.json();
                     setFeedsContent([...feedsContent, ...feedObj.entries].sort((item1, item2) => ((new Date(item2.published)) - new Date(item1.published))));
                 }
-                localStorage.setItem(FEEDS_CONTENT, JSON.stringify(feedsContent));
             }
         }
 
         retrieveCollection();
     }, [currentCollection]);
+
+    localStorage.setItem(FEEDS_CONTENT, JSON.stringify(feedsContent));
 
     return <>
             {feedsContent.map((item, i) => {
