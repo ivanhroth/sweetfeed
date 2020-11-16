@@ -73,6 +73,7 @@ function App() {
 
                 <Route path="/">
                     {(user.id === 0 && user.triedRetrieving) ? <Redirect to='/login' /> : <></>}
+
                     <div className="main-container">
                         <div className="sidebar">
                             <div className="sidebar-box">
