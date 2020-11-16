@@ -10,6 +10,12 @@ def index():
     return {"users": [user.to_dict() for user in response]}
 
 
+@user_routes.route('/<username>')
+def get_user_by_name(username):
+    response = User.query.filter_by(username=username).one()
+    return jsonify(response.to_dict())
+
+
 @user_routes.route('/<int:id>/collections')
 def user_collections(id):
     user = User.query.filter_by(id=id).one()

@@ -10,28 +10,39 @@ function App() {
 
     const getUserFromToken = token => token ? JSON.parse(atob(token.split('.')[1])) : { id: 0, username: "" };
 
-    const [user, setUser] = useState(getUserFromToken(localStorage.getItem(SWEETFEED_JWT_TOKEN)));
+    const [user, setUser] = useState({ id: 0 });
     const [myCollections, setMyCollections] = useState([{name: "", feeds: [], id: 0}]);
     const [currentCollectionId, setCurrentCollectionId] = useState(0);
     const [currentView, setCurrentView] = useState(<></>);
 
     const retrieveCollections = async () => {
         if (myCollections[0].name === "") {
-            const res = await fetch(`/users/${user.id}/collections`);
+            const res = await fetch(`/api/users/${user.id}/collections`);
             const collections = await res.json();
             setMyCollections(collections);
         }
+    }
+
+    const retrieveUser = async () => {
+        const tokenParsed = getUserFromToken(localStorage.getItem(SWEETFEED_JWT_TOKEN))
+        const res = await fetch(`/api/users/${tokenParsed.identity}`);
+        const currentUser = await res.json();
+        setUser(currentUser);
     }
 
     const logOut = () => {
         localStorage.removeItem(SWEETFEED_JWT_TOKEN);
         setUser({});
         setCurrentCollectionId(0);
-        setCurrentView(<></>)
+        setCurrentView(<></>);
     }
 
     useEffect(() => {
-        retrieveCollections();
+        if (user.id === 0){
+            retrieveUser()
+        } else {
+            retrieveCollections();
+        }
     })
 
     console.log(user);
@@ -41,7 +52,7 @@ function App() {
             <nav>
                 <ul>
                     <li><NavLink to="/" exact activeclass="active">Home</NavLink></li>
-                    {user ? <li><NavLink to="/login" activeclass="active">Log in</NavLink> or <NavLink to="/register" activeclass="active">Register an account</NavLink></li> : <NavLink to='/login' activeclass='active' onClick={logOut}>Log out</NavLink>}
+                    {!user.id ? <li><NavLink to="/login" activeclass="active">Log in</NavLink> or <NavLink to="/register" activeclass="active">Register an account</NavLink></li> : <li><NavLink to='/login' activeclass='active' onClick={logOut}>Log out</NavLink></li>}
                 </ul>
             </nav>
             <Switch>
