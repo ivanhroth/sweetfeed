@@ -63,7 +63,7 @@ export default function EditCollectionForm(props) {
                 setCollectionFeeds(newFeeds);
             }}>remove feed</button></div>)}
 
-            <input type="text" value={newFeed} name="url" placeholder="Enter URL" onChange={e => {
+            <input type="text" value={newFeed} name="url" placeholder="Enter feed URL" onChange={e => {
                 setNewFeed(e.target.value);
             }}></input><button onClick={async e => {
                 e.preventDefault();
