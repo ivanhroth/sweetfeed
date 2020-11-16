@@ -35,12 +35,16 @@ nav ul li a:hover {
 button {
     background-color: bisque;
     border-radius: 10px;
-    border: 1px solid salmon;
+    border: 1px solid gray;
     color: gray;
+    font-size: 110%;
 }
 
 input {
     border: 1px solid gray;
+    border-radius: 5px;
+    margin: 1px;
+    font-size: 110%;
 }
 
 
@@ -123,4 +127,19 @@ input {
     color: gray;
     font-size: 120%;
     margin-bottom: 5px;
+}
+
+.login-header {
+    font-size: 120%;
+    color: gray;
+    text-align: center;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container * {
+    margin: 0 auto;
 }

@@ -32,9 +32,9 @@ const Login = props => {
     if (token) return <Redirect to="/"/>
 
     return (
-    <div>
-        <h2>Log in</h2>
-        <form>
+    <div className="login-container">
+        <h2 className="login-header">Log in</h2>
+        <form className="login-form">
             <div>
             <input onChange={e => updateUsername(e.target.value)} type="username" placeholder="Username" required />
             </div>

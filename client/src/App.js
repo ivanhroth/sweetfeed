@@ -26,6 +26,10 @@ function App() {
     }
 
     const retrieveUser = async () => {
+            if (!localStorage.getItem(SWEETFEED_JWT_TOKEN)){
+                if (!user.triedRetrieving) setUser({...user, triedRetrieving: true});
+                return {};
+            }
             const tokenParsed = getUserFromToken(localStorage.getItem(SWEETFEED_JWT_TOKEN))
             const res = await fetch(`/api/users/${tokenParsed.identity}`);
             console.log(res);
@@ -49,7 +53,7 @@ function App() {
         } else {
             retrieveCollections();
         }
-    })
+    }, [user])
 
     console.log(user);
 
@@ -82,7 +86,7 @@ function App() {
                         {myCollections.map(collection =>{
                         if (collection.id !== 0) return (
                         <div key={collection.id} className="collection-option">
-                                <span onClick={() => {
+                                <span className='collection-name' onClick={() => {
                                     setCurrentView(<CollectionView id={collection.id} />);
                                 }}>{collection.name}</span> <span className="edit-button" onClick={() => {
                                 setCurrentView(<EditCollectionForm id={collection.id} />)
