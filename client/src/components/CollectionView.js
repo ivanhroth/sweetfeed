@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 const FEEDS_CONTENT = 'FEEDS_CONTENT';
 
 export default function CollectionView(props) {
-    const [feedsContent, setFeedsContent] = useState(localStorage.getItem(FEEDS_CONTENT) ? JSON.parse(localStorage.getItem(FEEDS_CONTENT)): []);
+    //const [feedsContent, setFeedsContent] = useState(localStorage.getItem(FEEDS_CONTENT) ? JSON.parse(localStorage.getItem(FEEDS_CONTENT)): []);
+    const [feedsContent, setFeedsContent] = useState([]);
     const [currentCollection, setCurrentCollection] = useState({ name: "", feeds: [], id: 0 });
 
 
@@ -29,7 +30,7 @@ export default function CollectionView(props) {
         retrieveCollection();
     }, [currentCollection]);
 
-    localStorage.setItem(FEEDS_CONTENT, JSON.stringify(feedsContent));
+    //localStorage.setItem(FEEDS_CONTENT, JSON.stringify(feedsContent));
 
     return <>
             {feedsContent.map((item, i) => {
