@@ -33,7 +33,7 @@ nav ul li a:hover {
 }
 
 button {
-    background-color: tan;
+    background-color: bisque;
     border-radius: 10px;
     border: 1px solid salmon;
 }
@@ -79,8 +79,8 @@ input {
 
 .collection-option {
     width: 100%;
-    background-color: gray;
-    color: white;
+    background-color: #D8D8D8;
+    color: gray;
     text-align: center;
     cursor: pointer;
     margin: 2px 0;
