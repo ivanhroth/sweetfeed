@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-import UserList from './components/UsersList';
 import Login, { SWEETFEED_JWT_TOKEN } from './components/Login';
 import Register from './components/Register';
 import CollectionView from './components/CollectionView';
