@@ -35,6 +35,8 @@ function App() {
         retrieveCollections();
     })
 
+    console.log(user);
+
     return (
         <BrowserRouter>
             <nav>
