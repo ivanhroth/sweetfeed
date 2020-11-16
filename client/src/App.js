@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, NavLink, useHistory } from 'react-router-dom';
 import Login, { SWEETFEED_JWT_TOKEN } from './components/Login';
 import Register from './components/Register';
 import CollectionView from './components/CollectionView';
@@ -7,6 +7,8 @@ import EditCollectionForm from './components/EditCollectionForm';
 
 
 function App() {
+
+    const history = useHistory();
 
     const getUserFromToken = token => token ? JSON.parse(atob(token.split('.')[1])) : { id: 0, username: "" };
 
@@ -24,10 +26,14 @@ function App() {
     }
 
     const retrieveUser = async () => {
-        const tokenParsed = getUserFromToken(localStorage.getItem(SWEETFEED_JWT_TOKEN))
-        const res = await fetch(`/api/users/${tokenParsed.identity}`);
-        const currentUser = await res.json();
-        setUser(currentUser);
+        try {
+            const tokenParsed = getUserFromToken(localStorage.getItem(SWEETFEED_JWT_TOKEN))
+            const res = await fetch(`/api/users/${tokenParsed.identity}`);
+            const currentUser = await res.json();
+            setUser(currentUser);
+        } catch {
+            history.push('/login')
+        }
     }
 
     const logOut = () => {
