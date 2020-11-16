@@ -79,7 +79,7 @@ export default function EditCollectionForm(props) {
                     return <div className="feed-result" key={feed.id}>
                         <img src={feed.favicon} /> <span className="feed-name">{feed.title}</span> <button onClick={e => {
                             e.preventDefault();
-                            setCollectionFeeds([...collectionFeeds, feed]);
+                            setCollectionFeeds([...collectionFeeds, {name: feed.title}]);
                             updateCollectionFeeds(feed);
                         }
                             }>Add to collection</button>
