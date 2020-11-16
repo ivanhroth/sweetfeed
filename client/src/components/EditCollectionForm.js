@@ -3,19 +3,20 @@ import React, { useEffect, useState } from 'react';
 export default function EditCollectionForm(props) {
 
     const [collectionName, setCollectionName] = useState("");
-    const [collectionFeeds, setCollectionFeeds] = useState([])
     const [currentResults, setCurrentResults] = useState([])
     const [newFeed, setNewFeed] = useState([]);
     const [collection, setCollection] = useState({name: "", feeds: []});
+    const [collectionFeeds, setCollectionFeeds] = useState(collection.feeds);
+
 
     async function retrieveCollection() {
         const res = await fetch(`/collections/${props.id}`);
         const retrievedCollection = await res.json();
         if (retrievedCollection.id !== collection.id){
             setCollection(retrievedCollection);
+            setCollectionFeeds(retrievedCollection.feeds);
         }
-        if (collectionFeeds === [] && collection.feeds) setCollectionFeeds(collection.feeds);
-        if (collection.name && collectionName !== collection.name) console.log("change the name in the database");
+        //if (collection.name && collectionName !== collection.name) console.log("change the name in the database");
     }
 
     useEffect(() => {
@@ -29,7 +30,6 @@ export default function EditCollectionForm(props) {
                                   { method: 'PUT',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify(feed) });
-        setCollectionFeeds([...collectionFeeds, feed])
     }
 
     const saveTitle = async title => {
@@ -43,7 +43,7 @@ export default function EditCollectionForm(props) {
 
     console.log(collection);
     console.log(collection.name);
-    console.log(collection.feeds);
+    console.log(collectionFeeds);
 
     return <>
         <form className="edit-collection-form">
@@ -56,7 +56,7 @@ export default function EditCollectionForm(props) {
                 }}>save title</button>
             </div>
 
-            {collection.feeds.map(feed => <div className="feed-list-item collection-option">{feed.name} <button onClick={async e => {
+            {collectionFeeds.map(feed => <div className="feed-list-item collection-option">{feed.name} <button onClick={async e => {
                 e.preventDefault();
                 await fetch(`/collections/${collection.id}/removefeed/${feed.id}`);
                 setCollectionFeeds(collectionFeeds.filter(f => f !== feed));
@@ -79,7 +79,9 @@ export default function EditCollectionForm(props) {
                     return <div className="feed-result" key={feed.id}>
                         <img src={feed.favicon} /> <span className="feed-name">{feed.title}</span> <button onClick={e => {
                             e.preventDefault();
-                            updateCollectionFeeds(feed)}
+                            setCollectionFeeds([...collectionFeeds, feed]);
+                            updateCollectionFeeds(feed);
+                        }
                             }>Add to collection</button>
                     </div>
                 })}
