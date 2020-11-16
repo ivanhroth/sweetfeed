@@ -46,9 +46,6 @@ function App() {
                 </ul>
             </nav>
             <Switch>
-                <Route path="/users">
-                    <UserList />
-                </Route>
 
                 <Route path="/login">
                     <Login />
