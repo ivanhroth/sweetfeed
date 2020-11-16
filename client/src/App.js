@@ -87,12 +87,16 @@ function App() {
                         if (collection.id !== 0) return (
                         <div key={collection.id} className="collection-option">
                                 <span className='collection-name' onClick={() => {
+                                    setCurrentCollectionId(collection.id);
                                     setCurrentView(<CollectionView id={collection.id} />);
                                 }}>{collection.name}</span> <span className="edit-button" onClick={() => {
-                                setCurrentView(<EditCollectionForm id={collection.id} />)
+                                    setCurrentCollectionId(collection.id);
+                                    setCurrentView(<EditCollectionForm id={collection.id} />)
                                 }}>(edit)</span> <span className="edit-button" onClick={async () => {
+                                    const deletedId = collection.id
                                     await fetch(`/collections/${collection.id}/remove`);
                                     setMyCollections(myCollections.filter(c => c !== collection));
+                                    if (currentCollectionId === deletedId) setCurrentView(<></>)
                                 }}>(remove)</span>
                         </div>)})}
                         <button className="add-collection-button" onClick={async e => {
@@ -101,7 +105,8 @@ function App() {
                             const newCollection = await newCollectionRes.json();
                             const newId = newCollection.id;
                             setMyCollections([...myCollections, newCollection]);
-                            setCurrentView(<EditCollectionForm id={newId} />)
+                            setCurrentView(<EditCollectionForm id={newId} />);
+                            setCurrentCollectionId(newId);
                         }}>Create a new collection</button>
                         </div>
                         <div className="viewer-container">
