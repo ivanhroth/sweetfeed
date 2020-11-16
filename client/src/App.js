@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import UserList from './components/UsersList';
-import Login from './components/Login';
+import Login, { SWEETFEED_JWT_TOKEN } from './components/Login';
 import Register from './components/Register';
 import CollectionView from './components/CollectionView';
 import EditCollectionForm from './components/EditCollectionForm';
@@ -9,7 +9,9 @@ import EditCollectionForm from './components/EditCollectionForm';
 
 function App() {
 
-    const [user, setUser] = useState({})
+    const getUserFromToken = token => token ? JSON.parse(atob(token.split('.')[1])) : null;
+
+    const [user, setUser] = useState(getUserFromToken(localStorage.getItem(SWEETFEED_JWT_TOKEN)));
     const [myCollections, setMyCollections] = useState([{name: "", feeds: [], id: 0}]);
     const [currentCollectionId, setCurrentCollectionId] = useState(0);
     const [currentView, setCurrentView] = useState(<></>);
