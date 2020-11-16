@@ -79,13 +79,15 @@ function App() {
                             <div className="sidebar-box">
                                 <h4>Collections</h4>
                             </div>
-                        {myCollections.map(collection => <div key={collection.id} className="collection-option">
+                        {myCollections.map(collection =>{
+                        if (collection.id !== 0) return (
+                        <div key={collection.id} className="collection-option">
                                 <span onClick={() => {
                                     setCurrentView(<CollectionView id={collection.id} />);
                                 }}>{collection.name}</span> <span className="edit-button" onClick={() => {
                                 setCurrentView(<EditCollectionForm id={collection.id} />)
                                 }}>(edit)</span>
-                        </div>)}
+                        </div>)})}
                         </div>
                         <div className="viewer-container">
                             {currentView}
