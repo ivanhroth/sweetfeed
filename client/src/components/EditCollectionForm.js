@@ -84,6 +84,7 @@ export default function EditCollectionForm(props) {
             }}>remove feed</button></div>)}
 
             <div className="feed-add-container">
+            <form onSubmit={e => e.preventDefault()}>
             <input type="text" value={newFeed} name="url" placeholder="Enter feed URL" onChange={e => {
                 setNewFeed(e.target.value);
             }}></input><button onClick={async e => {
@@ -96,6 +97,7 @@ export default function EditCollectionForm(props) {
                 if (results) setCurrentResults(results);
                 else setCurrentResults([]);
             }}>Find</button>
+            </form>
             <div className="feed-results">
                 {currentResults.map(feed => {
                     return <div className="feed-result" key={feed.id}>
