@@ -57,3 +57,25 @@ def remove_collection(id):
     db.session.delete(collection)
     db.session.commit()
     return jsonify({'msg': 'Success'})
+
+
+@data_routes.route('/collections/<int:id>/update', methods=['PUT'])
+def update_collection(id):
+    new_data = request.get_json()
+    collection = Collection.query.filter_by(id=id).one()
+    # for key in new_data:
+    #     collection[key] = new_data[key]
+    keys = list(new_data.keys())
+    for key in keys:
+        exec("collection." + key + " = new_data[\"" + key + "\"]")
+    db.session.commit()
+    return jsonify({
+        "name": collection.name,
+        "id": collection.id,
+        "description": collection.description,
+        "private": collection.private,
+        "user_id": collection.user_id,
+        "feeds": list(map(lambda feed: {"id": feed.id,
+                                        "name": feed.name,
+                                        "url": feed.url}, collection.feeds))
+    })

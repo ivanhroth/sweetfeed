@@ -36,7 +36,9 @@ def user_collections(id):
 
 @user_routes.route('/<int:id>/addcollection')
 def add_collection(id):
-    new_collection = Collection(name="Untitled Collection", user_id=id)
+    new_collection = Collection(name="Untitled Collection",
+                                user_id=id,
+                                private=False)
     db.session.add(new_collection)
     db.session.commit()
     new_row = Collection.query \

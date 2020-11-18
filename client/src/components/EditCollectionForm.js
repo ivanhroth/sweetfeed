@@ -29,17 +29,28 @@ export default function EditCollectionForm(props) {
     }, [collection, collectionFeeds]);
 
     const updateCollectionFeeds = async feed => {
-        const res = await fetch(`/collections/${props.id}/addfeed`,
+        const res = await fetch(`/collections/${collection.id}/addfeed`,
                                   { method: 'PUT',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify(feed) });
     }
 
     const saveTitle = async title => {
-        const res = await fetch(`/collections/${props.id}/editname`,
+        const res = await fetch(`/collections/${collection.id}/editname`,
                                 { method: 'PUT',
                                   headers: { 'Content-Type': 'application/json'},
                                   body: JSON.stringify({name: collectionName })});
+        const newCollection = await res.json();
+        setCollection(newCollection);
+    }
+
+    const updateCollection = async changes => {
+        const res = await fetch(`/collections/${collection.id}/update`,
+                                {   method: 'PUT',
+                                    headers: {
+                                        "Content-Type": 'application/json'
+                                    },
+                                    body: JSON.stringify(changes) });
         const newCollection = await res.json();
         setCollection(newCollection);
     }
@@ -55,7 +66,8 @@ export default function EditCollectionForm(props) {
             }}></input>
             <button onClick={e => {
                 e.preventDefault();
-                saveTitle(collection.name);
+                //saveTitle(collection.name);
+                updateCollection({ name: collectionName })
                 }}>save title</button>
             </div>
 
@@ -63,7 +75,7 @@ export default function EditCollectionForm(props) {
                 <span className="collection-checkbox-label">Private?</span>
                 <input type="checkbox" checked={collectionPrivate} onChange={e => {
                     setCollectionPrivate(e.target.checked);
-                    // change it in the database too
+                    updateCollection({ private: e.target.checked })
                 }} />
             </div>
 
