@@ -5,12 +5,10 @@ export default function EditCollectionForm(props) {
     const [currentResults, setCurrentResults] = useState([])
     const [newFeed, setNewFeed] = useState([]);
     const [collection, setCollection] = useState({name: "", feeds: []});
-    //const [collectionName, setCollectionName] = useState(collection.name);
+    const [collectionName, setCollectionName] = useState(collection.name);
     const [collectionFeeds, setCollectionFeeds] = useState(collection.feeds);
     const [collectionPrivate, setCollectionPrivate] = useState(collection.private);
     const [collectionDescription, setCollectionDescription] = useState(collection.description)
-
-    const [collectionName, setCollectionName] = useState(collection.name);
 
     const setCurrentCollectionName = props.nameSetter;
 
@@ -23,13 +21,10 @@ export default function EditCollectionForm(props) {
             setCollectionPrivate(retrievedCollection.private);
             setCollectionName(retrievedCollection.name)
         }
-        //if (collection.name && collectionName !== collection.name) console.log("change the name in the database");
     }
 
     useEffect(() => {
         retrieveCollection();
-        //if (collectionName === "") setCollectionName(collection.name);
-        //localStorage.removeItem('FEEDS_CONTENT'); // so that outdated feed content is not used
     }, [collection, collectionFeeds, collectionName]);
 
     const updateCollectionFeeds = async feed => {
@@ -38,15 +33,6 @@ export default function EditCollectionForm(props) {
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify(feed) });
     }
-
-    // const saveTitle = async title => {
-    //     const res = await fetch(`/collections/${collection.id}/editname`,
-    //                             { method: 'PUT',
-    //                               headers: { 'Content-Type': 'application/json'},
-    //                               body: JSON.stringify({name: collectionName })});
-    //     const newCollection = await res.json();
-    //     setCollection(newCollection);
-    // }
 
     const updateCollection = async changes => {
         const res = await fetch(`/collections/${collection.id}/update`,
@@ -73,11 +59,6 @@ export default function EditCollectionForm(props) {
                     updateCollection({ name: e.target.value });
             }}></input>
             </form>
-            {/* <button onClick={e => {
-                e.preventDefault();
-                //saveTitle(collection.name);
-                updateCollection({ name: collectionName })
-                }}>save title</button> */}
             </div>
 
             <div className="collection-checkbox-container">
