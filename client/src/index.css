@@ -181,3 +181,8 @@ input {
 .edit-collection-form div {
     margin: 10px;
 }
+
+.collection-view-header {
+    font-size: 300%;
+    text-align: center;
+}

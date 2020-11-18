@@ -33,6 +33,7 @@ export default function CollectionView(props) {
     //localStorage.setItem(FEEDS_CONTENT, JSON.stringify(feedsContent));
 
     return <>
+            <span className="collection-view-header">{currentCollection.name}</span>
             {feedsContent.map((item, i) => {
                 console.log(item);
                 return <div className="item-box">
