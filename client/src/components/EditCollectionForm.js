@@ -5,11 +5,14 @@ export default function EditCollectionForm(props) {
     const [currentResults, setCurrentResults] = useState([])
     const [newFeed, setNewFeed] = useState([]);
     const [collection, setCollection] = useState({name: "", feeds: []});
-    const [collectionName, setCollectionName] = useState(collection.name);
+    //const [collectionName, setCollectionName] = useState(collection.name);
     const [collectionFeeds, setCollectionFeeds] = useState(collection.feeds);
     const [collectionPrivate, setCollectionPrivate] = useState(collection.private);
     const [collectionDescription, setCollectionDescription] = useState(collection.description)
 
+    const [collectionName, setCollectionName] = useState(collection.name);
+
+    const setCurrentCollectionName = props.nameSetter;
 
     async function retrieveCollection() {
         const res = await fetch(`/collections/${props.id}`);
@@ -27,7 +30,7 @@ export default function EditCollectionForm(props) {
         retrieveCollection();
         //if (collectionName === "") setCollectionName(collection.name);
         //localStorage.removeItem('FEEDS_CONTENT'); // so that outdated feed content is not used
-    }, [collection, collectionFeeds]);
+    }, [collection, collectionFeeds, collectionName]);
 
     const updateCollectionFeeds = async feed => {
         const res = await fetch(`/collections/${collection.id}/addfeed`,
@@ -36,14 +39,14 @@ export default function EditCollectionForm(props) {
                                     body: JSON.stringify(feed) });
     }
 
-    const saveTitle = async title => {
-        const res = await fetch(`/collections/${collection.id}/editname`,
-                                { method: 'PUT',
-                                  headers: { 'Content-Type': 'application/json'},
-                                  body: JSON.stringify({name: collectionName })});
-        const newCollection = await res.json();
-        setCollection(newCollection);
-    }
+    // const saveTitle = async title => {
+    //     const res = await fetch(`/collections/${collection.id}/editname`,
+    //                             { method: 'PUT',
+    //                               headers: { 'Content-Type': 'application/json'},
+    //                               body: JSON.stringify({name: collectionName })});
+    //     const newCollection = await res.json();
+    //     setCollection(newCollection);
+    // }
 
     const updateCollection = async changes => {
         const res = await fetch(`/collections/${collection.id}/update`,
@@ -54,6 +57,7 @@ export default function EditCollectionForm(props) {
                                     body: JSON.stringify(changes) });
         const newCollection = await res.json();
         setCollection(newCollection);
+        setCurrentCollectionName(newCollection.name);
     }
 
     console.log(collection);

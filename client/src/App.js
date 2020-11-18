@@ -16,13 +16,12 @@ function App() {
     const [myCollections, setMyCollections] = useState([{name: "", feeds: [], id: 0}]);
     const [currentCollectionId, setCurrentCollectionId] = useState(0);
     const [currentView, setCurrentView] = useState(<></>);
+    const [currentCollectionName, setCurrentCollectionName] = useState("");
 
     const retrieveCollections = async () => {
-        if (myCollections[0].name === "") {
             const res = await fetch(`/api/users/${user.id}/collections`);
             const collections = await res.json();
             setMyCollections(collections);
-        }
     }
 
     const retrieveUser = async () => {
@@ -53,7 +52,7 @@ function App() {
         } else {
             retrieveCollections();
         }
-    }, [user])
+    }, [user, currentCollectionId, currentCollectionName])
 
     console.log(user);
 
@@ -91,7 +90,7 @@ function App() {
                                     setCurrentView(<CollectionView id={collection.id} />);
                                 }}>{collection.name}</span> <span className="edit-button" onClick={() => {
                                     setCurrentCollectionId(collection.id);
-                                    setCurrentView(<EditCollectionForm id={collection.id} />)
+                                    setCurrentView(<EditCollectionForm id={collection.id} nameSetter={setCurrentCollectionName} />)
                                 }}>(edit)</span> <span className="edit-button" onClick={async () => {
                                     const deletedId = collection.id
                                     await fetch(`/collections/${collection.id}/remove`);
@@ -105,7 +104,7 @@ function App() {
                             const newCollection = await newCollectionRes.json();
                             const newId = newCollection.id;
                             setMyCollections([...myCollections, newCollection]);
-                            setCurrentView(<EditCollectionForm id={newId} />);
+                            setCurrentView(<EditCollectionForm id={newId} nameSetter={setCurrentCollectionName} />);
                             setCurrentCollectionId(newId);
                         }}>Create a new collection</button>
                         </div>
