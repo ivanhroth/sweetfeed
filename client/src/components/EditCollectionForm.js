@@ -85,7 +85,6 @@ export default function EditCollectionForm(props) {
             </div>
 
             <div className="collection-description-container">
-                <span className="collection-description-header">Description</span>
                 <textarea className="collection-description-field" value={collectionDescription} placeholder="Write a description of your feed collection here!" onChange={e => {
                     setCollectionDescription(e.target.value);
                     updateCollection({ description: e.target.value });
@@ -98,6 +97,7 @@ export default function EditCollectionForm(props) {
                 setCollectionFeeds(collectionFeeds.filter(f => f !== feed));
             }}>remove feed</button></div>)}
 
+            <div className="feed-add-container">
             <input type="text" value={newFeed} name="url" placeholder="Enter feed URL" onChange={e => {
                 setNewFeed(e.target.value);
             }}></input><button onClick={async e => {
@@ -121,6 +121,7 @@ export default function EditCollectionForm(props) {
                             }>Add to collection</button>
                     </div>
                 })}
+            </div>
             </div>
         </form>
     </>
