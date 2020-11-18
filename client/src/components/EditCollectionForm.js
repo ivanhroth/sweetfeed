@@ -77,7 +77,7 @@ export default function EditCollectionForm(props) {
                 }} />
             </div>
 
-            {collectionFeeds.map(feed => <div className="feed-list-item collection-option">{feed.name} <button onClick={async e => {
+            {collectionFeeds.map(feed => <div className="feed-list-item collection-option">{feed.favicon ? <img src={feed.favicon} height="25" width="25" /> : <></>}{feed.name} <button onClick={async e => {
                 e.preventDefault();
                 await fetch(`/collections/${collection.id}/removefeed/${feed.id}`);
                 setCollectionFeeds(collectionFeeds.filter(f => f !== feed));
@@ -101,7 +101,7 @@ export default function EditCollectionForm(props) {
                     return <div className="feed-result" key={feed.id}>
                         <img src={feed.favicon} /> <span className="feed-name">{feed.title}</span> <button onClick={e => {
                             e.preventDefault();
-                            setCollectionFeeds([...collectionFeeds, {name: feed.title}]);
+                            setCollectionFeeds([...collectionFeeds, {name: feed.title, favicon: feed.favicon}]);
                             updateCollectionFeeds(feed);
                         }
                             }>Add to collection</button>

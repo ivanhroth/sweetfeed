@@ -30,6 +30,7 @@ def user_collections(id):
         "description": collection.description,
         "feeds": list(map(lambda feed: {"id": feed.id,
                                         "name": feed.name,
+                                        "favicon": feed.favicon,
                                         "url": feed.url}, collection.feeds))
     }, collections)))
 

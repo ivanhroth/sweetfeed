@@ -16,6 +16,7 @@ def get_collection(id):
         "user_id": collection.user_id,
         "feeds": list(map(lambda feed: {"id": feed.id,
                                         "name": feed.name,
+                                        "favicon": feed.favicon,
                                         "url": feed.url}, collection.feeds))
     })
 
@@ -24,7 +25,9 @@ def get_collection(id):
 def add_feed(id):
     feed = request.get_json()
     current_collection = Collection.query.filter_by(id=id).one()
-    new_feed = Feed(name=feed['title'], url=feed['url'])
+    new_feed = Feed(name=feed['title'],
+                    url=feed['url'],
+                    favicon=feed['favicon'])
     current_collection.feeds.append(new_feed)
     db.session.add(new_feed)
     db.session.commit()
@@ -48,6 +51,7 @@ def remove_feed(id, feedid):
     db.session.commit()
     return jsonify(list(map(lambda feed: {"id": feed.id,
                                           "name": feed.name,
+                                          "favicon": feed.favicon,
                                           "url": feed.url}, collection.feeds)))
 
 
@@ -75,5 +79,6 @@ def update_collection(id):
         "user_id": collection.user_id,
         "feeds": list(map(lambda feed: {"id": feed.id,
                                         "name": feed.name,
+                                        "favicon": feed.favicon,
                                         "url": feed.url}, collection.feeds))
     })
