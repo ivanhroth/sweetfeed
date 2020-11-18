@@ -157,3 +157,22 @@ input {
 .logo {
     max-height: 17px;
 }
+
+.collection-description-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.collection-description-header {
+    text-align: center;
+}
+
+.collection-description-field {
+    border: 0px;
+    font-family: inherit;
+    background-color: gainsboro;
+}
+
+.collection-checkbox-label {
+    color: gray;
+}

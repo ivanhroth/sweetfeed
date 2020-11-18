@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 export default function EditCollectionForm(props) {
 
-    const [collectionName, setCollectionName] = useState("");
     const [currentResults, setCurrentResults] = useState([])
     const [newFeed, setNewFeed] = useState([]);
     const [collection, setCollection] = useState({name: "", feeds: []});
+    const [collectionName, setCollectionName] = useState(collection.name);
     const [collectionFeeds, setCollectionFeeds] = useState(collection.feeds);
     const [collectionPrivate, setCollectionPrivate] = useState(collection.private);
+    const [collectionDescription, setCollectionDescription] = useState(collection.description)
 
 
     async function retrieveCollection() {
@@ -80,6 +81,14 @@ export default function EditCollectionForm(props) {
                 <input type="checkbox" checked={collectionPrivate} onChange={e => {
                     setCollectionPrivate(e.target.checked);
                     updateCollection({ private: e.target.checked })
+                }} />
+            </div>
+
+            <div className="collection-description-container">
+                <span className="collection-description-header">Description</span>
+                <textarea className="collection-description-field" value={collectionDescription} placeholder="Write a description of your feed collection here!" onChange={e => {
+                    setCollectionDescription(e.target.value);
+                    updateCollection({ description: e.target.value });
                 }} />
             </div>
 
