@@ -34,6 +34,7 @@ export default function CollectionView(props) {
 
     return <>
             <span className="collection-view-header">{currentCollection.name}</span>
+            {feedsContent.length ? <></> : <span className="no-items">No items found...</span>}
             {feedsContent.map((item, i) => {
                 console.log(item);
                 return <div className="item-box">

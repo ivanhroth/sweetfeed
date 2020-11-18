@@ -84,7 +84,7 @@ input {
 .collection-option {
     width: 100%;
     background-color: #D8D8D8;
-    color: black;
+    color: rgb(68, 68, 68);
     text-align: center;
     cursor: pointer;
     margin: 2px 0;
@@ -201,4 +201,10 @@ input {
 
 .item-contents img {
     margin: 0 auto;
+}
+
+.no-items {
+    text-align: center;
+    color: gray;
+    margin: 50px 0;
 }
