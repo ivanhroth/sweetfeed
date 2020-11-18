@@ -192,6 +192,14 @@ input {
     text-align: center;
 }
 
+.item-header {
+    font-size: 120%;
+}
+
+.item-byline {
+    color: gray;
+}
+
 .item-contents {
     display: flex;
     flex-direction: column;
@@ -207,4 +215,9 @@ input {
     text-align: center;
     color: gray;
     margin: 50px 0;
+}
+
+.item-source {
+    text-align: center;
+    font-size: 120%;
 }

@@ -21,7 +21,8 @@ export default function CollectionView(props) {
                     const feed = collection.feeds[i];
                     const res = await fetch(`/feedcontent/${feed.id}`);
                     const feedObj = await res.json();
-                    newFeedsContent = [...newFeedsContent, ...feedObj.entries].sort((item1, item2) => ((new Date(item2.published)) - new Date(item1.published)));
+                    const entries = feedObj.entries.map(entry => ({...entry, feedName: feed.name}));
+                    newFeedsContent = [...newFeedsContent, ...entries].sort((item1, item2) => ((new Date(item2.published)) - new Date(item1.published)));
                 }
                 setFeedsContent(newFeedsContent);
             }
@@ -38,6 +39,7 @@ export default function CollectionView(props) {
             {feedsContent.map((item, i) => {
                 console.log(item);
                 return <div className="item-box">
+                    <div className="item-source">{item.feedName}</div>
                     <div className="item-header"><a href={item.link}>{item.title}</a></div>
                     <div className="item-byline">by {item.author} at {item.published}</div>
                     <div className="item-contents" dangerouslySetInnerHTML={{ __html: item.summary }}>
