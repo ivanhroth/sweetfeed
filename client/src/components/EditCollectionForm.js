@@ -19,7 +19,8 @@ export default function EditCollectionForm(props) {
             setCollection(retrievedCollection);
             setCollectionFeeds(retrievedCollection.feeds);
             setCollectionPrivate(retrievedCollection.private);
-            setCollectionName(retrievedCollection.name)
+            setCollectionName(retrievedCollection.name);
+            setCollectionDescription(retrievedCollection.description);
         }
     }
 

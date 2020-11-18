@@ -172,7 +172,7 @@ input {
 .collection-description-field {
     border: 0px;
     font-family: inherit;
-    background-color: gainsboro;
+    background-color:inherit;
 }
 
 .collection-checkbox-label {

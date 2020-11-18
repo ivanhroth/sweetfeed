@@ -38,7 +38,8 @@ def user_collections(id):
 def add_collection(id):
     new_collection = Collection(name="Untitled Collection",
                                 user_id=id,
-                                private=False)
+                                private=False,
+                                description="A pretty cool collection.")
     db.session.add(new_collection)
     db.session.commit()
     new_row = Collection.query \
