@@ -41,7 +41,7 @@ export default function CollectionView(props) {
                 return <div className="item-box">
                     <div className="item-source">{item.feedName}</div>
                     <div className="item-header"><a href={item.link}>{item.title}</a></div>
-                    <div className="item-byline">by {item.author} at {item.published}</div>
+                    <div className="item-byline">{item.author ? `by ${item.author} at`:""} {item.published}</div>
                     <div className="item-contents" dangerouslySetInnerHTML={{ __html: item.summary }}>
                 </div>
             </div>
