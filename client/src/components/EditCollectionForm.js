@@ -7,6 +7,7 @@ export default function EditCollectionForm(props) {
     const [newFeed, setNewFeed] = useState([]);
     const [collection, setCollection] = useState({name: "", feeds: []});
     const [collectionFeeds, setCollectionFeeds] = useState(collection.feeds);
+    const [collectionPrivate, setCollectionPrivate] = useState(collection.private);
 
 
     async function retrieveCollection() {
@@ -15,13 +16,15 @@ export default function EditCollectionForm(props) {
         if (retrievedCollection.id !== collection.id){
             setCollection(retrievedCollection);
             setCollectionFeeds(retrievedCollection.feeds);
+            setCollectionPrivate(retrievedCollection.private);
+            setCollectionName(retrievedCollection.name)
         }
         //if (collection.name && collectionName !== collection.name) console.log("change the name in the database");
     }
 
     useEffect(() => {
         retrieveCollection();
-        if (collectionName === "") setCollectionName(collection.name);
+        //if (collectionName === "") setCollectionName(collection.name);
         //localStorage.removeItem('FEEDS_CONTENT'); // so that outdated feed content is not used
     }, [collection, collectionFeeds]);
 
@@ -54,6 +57,14 @@ export default function EditCollectionForm(props) {
                 e.preventDefault();
                 saveTitle(collection.name);
                 }}>save title</button>
+            </div>
+
+            <div className="collection-checkbox-container">
+                <span className="collection-checkbox-label">Private?</span>
+                <input type="checkbox" checked={collectionPrivate} onChange={e => {
+                    setCollectionPrivate(e.target.checked);
+                    // change it in the database too
+                }} />
             </div>
 
             {collectionFeeds.map(feed => <div className="feed-list-item collection-option">{feed.name} <button onClick={async e => {
