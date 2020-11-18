@@ -186,3 +186,18 @@ input {
     font-size: 300%;
     text-align: center;
 }
+
+.item-header, .item-byline {
+    text-align: center;
+}
+
+.item-contents {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 0;
+}
+
+.item-contents img {
+    margin: 0 auto;
+}
