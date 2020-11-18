@@ -26,6 +26,8 @@ def user_collections(id):
         "name": collection.name,
         "id": collection.id,
         "user_id": collection.user_id,
+        "private": collection.private,
+        "description": collection.description,
         "feeds": list(map(lambda feed: {"id": feed.id,
                                         "name": feed.name,
                                         "url": feed.url}, collection.feeds))

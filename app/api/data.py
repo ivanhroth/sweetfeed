@@ -11,6 +11,8 @@ def get_collection(id):
     return jsonify({
         "name": collection.name,
         "id": collection.id,
+        "description": collection.description,
+        "private": collection.private,
         "user_id": collection.user_id,
         "feeds": list(map(lambda feed: {"id": feed.id,
                                         "name": feed.name,
