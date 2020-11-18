@@ -61,14 +61,18 @@ export default function EditCollectionForm(props) {
 
     return <>
         <form className="edit-collection-form">
-            <div className="collection-name-container"><input type="text" value={collectionName} className="collection-name-field" placeholder="Collection name" name="name" onChange={e => {
-                setCollectionName(e.target.value);
+            <div className="collection-name-container">
+                <form onSubmit={e => e.preventDefault()}>
+                <input type="text" value={collectionName} className="collection-name-field" placeholder="Collection name" name="name" onChange={e => {
+                    setCollectionName(e.target.value);
+                    updateCollection({ name: e.target.value });
             }}></input>
-            <button onClick={e => {
+            </form>
+            {/* <button onClick={e => {
                 e.preventDefault();
                 //saveTitle(collection.name);
                 updateCollection({ name: collectionName })
-                }}>save title</button>
+                }}>save title</button> */}
             </div>
 
             <div className="collection-checkbox-container">

@@ -63,8 +63,6 @@ def remove_collection(id):
 def update_collection(id):
     new_data = request.get_json()
     collection = Collection.query.filter_by(id=id).one()
-    # for key in new_data:
-    #     collection[key] = new_data[key]
     keys = list(new_data.keys())
     for key in keys:
         exec("collection." + key + " = new_data[\"" + key + "\"]")
