@@ -67,6 +67,7 @@ input {
 
 .sidebar {
     width: 20%;
+    border: 1px solid grey;
 }
 
 .viewer-container {
@@ -76,7 +77,6 @@ input {
 .sidebar, .viewer-container {
     display: flex;
     flex-direction: column;
-    border: 1px solid grey;
     padding: 1px;
     margin: 2px;
 }
