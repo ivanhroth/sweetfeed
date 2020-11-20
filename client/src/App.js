@@ -4,6 +4,7 @@ import Login, { SWEETFEED_JWT_TOKEN } from './components/Login';
 import Register from './components/Register';
 import CollectionView from './components/CollectionView';
 import EditCollectionForm from './components/EditCollectionForm';
+import Intro from './components/Intro';
 
 
 function App() {
@@ -60,7 +61,7 @@ function App() {
         <BrowserRouter>
             <nav>
                 <ul>
-                    <li><NavLink to="/" exact activeclass="active"><img className="logo" src="/logo.png" /></NavLink></li>
+                    <li><NavLink to="/" exact activeclass="active"><img className="logo" src="/logo.png" onClick={() => setCurrentView(<Intro />)} /></NavLink></li>
                     {!user.id ? <li><NavLink to="/login" activeclass="active">Log in</NavLink> or <NavLink to="/register" activeclass="active">Register an account</NavLink></li> : <li><NavLink to='/login' activeclass='active' onClick={logOut}>Log out</NavLink></li>}
                 </ul>
             </nav>
