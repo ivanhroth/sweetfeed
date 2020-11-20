@@ -78,7 +78,7 @@ input {
     display: flex;
     flex-direction: column;
     padding: 1px;
-    margin: 2px;
+    margin: 7px 2px;
 }
 
 .collection-option {
