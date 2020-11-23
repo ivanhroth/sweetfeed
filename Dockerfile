@@ -15,9 +15,9 @@ RUN ["npm", "run", "build", "--prefix", "client"]
 # Move our react build for Flask to serve
 # Use cp here because we're copying files inside our working directory, not from
 # our host machine.
-RUN ["cp", "-r", "client/build", "starter_app/static"]
-RUN ["cp", "-r", "starter_app/static/static/js", "starter_app/static"]
-RUN ["cp", "-r", "starter_app/static/static/css", "starter_app/static"]
+RUN ["cp", "-r", "client/build", "app/static"]
+RUN ["cp", "-r", "app/static/static/js", "app/static"]
+RUN ["cp", "-r", "app/static/static/css", "app/static"]
 
 # Setup Flask environment
 ENV FLASK_APP=app
