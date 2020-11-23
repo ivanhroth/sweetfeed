@@ -20,11 +20,11 @@ RUN ["cp", "-r", "starter_app/static/static/js", "starter_app/static"]
 RUN ["cp", "-r", "starter_app/static/static/css", "starter_app/static"]
 
 # Setup Flask environment
-ENV FLASK_APP=starter_app
+ENV FLASK_APP=app
 ENV FLASK_ENV=production
 ENV SQLALCHEMY_ECHO=True
 
 EXPOSE 8000
 
 # Run flask environment
-CMD gunicorn starter_app:app
+CMD gunicorn app:app
