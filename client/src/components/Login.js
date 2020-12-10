@@ -27,10 +27,9 @@ const Login = props => {
     }
       };
 
-    if (localStorage.getItem(SWEETFEED_JWT_TOKEN)) return <Redirect to="/"/>
-
     return (
     <div className="login-container">
+        { localStorage.getItem(SWEETFEED_JWT_TOKEN) ? <Redirect to="/" /> : <></>}
         <h2 className="login-header">Log in</h2>
         <form className="login-form" onSubmit={e => {
             e.preventDefault();
