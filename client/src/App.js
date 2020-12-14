@@ -18,7 +18,7 @@ function App() {
     const [currentCollectionId, setCurrentCollectionId] = useState(0);
     const [currentView, setCurrentView] = useState(<></>);
     const [currentCollectionName, setCurrentCollectionName] = useState("");
-    debugger
+    //debugger
     const retrieveCollections = async () => {
             debugger
             const res = await fetch(`/api/users/${user.id}/collections`);
@@ -80,7 +80,7 @@ function App() {
                 </Route>
 
                 <Route path="/">
-                    {(user.id === 0 && user.triedRetrieving) ? <Redirect to='/login' /> : <></>}
+                    {!(localStorage.getItem(SWEETFEED_JWT_TOKEN)) ? <Redirect to='/login' /> : <></>}
 
                     <div className="main-container">
                         <div className="sidebar">
