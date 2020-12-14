@@ -18,14 +18,16 @@ function App() {
     const [currentCollectionId, setCurrentCollectionId] = useState(0);
     const [currentView, setCurrentView] = useState(<></>);
     const [currentCollectionName, setCurrentCollectionName] = useState("");
-
+    debugger
     const retrieveCollections = async () => {
+            debugger
             const res = await fetch(`/api/users/${user.id}/collections`);
             const collections = await res.json();
             setMyCollections(collections);
     }
 
     const retrieveUser = async () => {
+            debugger
             if (!localStorage.getItem(SWEETFEED_JWT_TOKEN)){
                 if (!user.triedRetrieving) setUser({...user, triedRetrieving: true});
                 return {};
@@ -48,9 +50,11 @@ function App() {
 
     useEffect(() => {
         if (user.id === 0){
+            debugger
             const retrieveUserResult = retrieveUser();
             if (retrieveUserResult.error) history.push('/login');
         } else {
+            debugger
             retrieveCollections();
         }
     }, [user, currentCollectionId, currentCollectionName])

@@ -11,6 +11,7 @@ const Login = props => {
     const [password, updatePassword] = useState("");
     const history = useHistory();
     const tryLogin = async () => {
+        debugger
         const formIsValid = validateForm();
         if (formIsValid) {
             const loginAttempt = await fetch(`/session`, {
@@ -18,7 +19,6 @@ const Login = props => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
         });
-
         if (loginAttempt.status === 200) {
             const { token } = await loginAttempt.json();
             localStorage.setItem(SWEETFEED_JWT_TOKEN, token);
