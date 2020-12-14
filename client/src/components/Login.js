@@ -6,7 +6,7 @@ export const SWEETFEED_JWT_TOKEN = "SWEETFEED_JWT_TOKEN"
 const validateForm = () => true;
 
 const Login = props => {
-    const token = props.token
+    const [token, setToken] = useState(props.token);
     const [username, updateUsername] = useState("");
     const [password, updatePassword] = useState("");
     const history = useHistory();
@@ -20,8 +20,10 @@ const Login = props => {
                 body: JSON.stringify({ username, password })
         });
         if (loginAttempt.status === 200) {
-            const { token } = await loginAttempt.json();
+            const tokenContainer = await loginAttempt.json();
+            setToken(tokenContainer.token);
             localStorage.setItem(SWEETFEED_JWT_TOKEN, token);
+
         }
         else console.error(loginAttempt.msg);
     }
