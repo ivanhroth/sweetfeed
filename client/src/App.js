@@ -11,7 +11,10 @@ function App() {
 
     const history = useHistory();
 
-    const getUserFromToken = token => token ? JSON.parse(atob(token.split('.')[1])) : { id: 0, username: "" };
+    const getUserFromToken = token =>{
+        debugger;
+        return token ? JSON.parse(atob(token.split('.')[1])) : { id: 0, username: "" };
+    }
 
     const [user, setUser] = useState({ id: 0 });
     const [myCollections, setMyCollections] = useState([{name: "", feeds: [], id: 0}]);
