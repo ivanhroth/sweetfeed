@@ -83,7 +83,7 @@ function App() {
                 </Route>
 
                 <Route path="/">
-                    {!(localStorage.getItem(SWEETFEED_JWT_TOKEN)) ? <Redirect to='/login' /> : <></>}
+                    {!localStorage.getItem(SWEETFEED_JWT_TOKEN) ? <Redirect to='/login' /> : <></>}
 
                     <div className="main-container">
                         <div className="sidebar">

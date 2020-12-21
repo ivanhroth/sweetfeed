@@ -22,6 +22,7 @@ const Login = props => {
         if (loginAttempt.status === 200) {
             let { token } = await loginAttempt.json();
             localStorage.setItem(SWEETFEED_JWT_TOKEN, token);
+            debugger
             setToken(token);
         }
         else console.error(loginAttempt.msg);
