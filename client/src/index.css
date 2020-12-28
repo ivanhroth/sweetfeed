@@ -226,3 +226,7 @@ input {
     text-align: center;
     margin: 10px;
 }
+
+#registration-link {
+    color: gray;
+}
