@@ -11,6 +11,8 @@ const Login = props => {
     const [password, updatePassword] = useState("");
     const history = useHistory();
     debugger
+    const setTokenSaved = props.setTokenSaved;
+    const tokenSaved = props.tokenSaved;
     const tryLogin = async () => {
         debugger
         const formIsValid = validateForm();
@@ -23,6 +25,7 @@ const Login = props => {
         if (loginAttempt.status === 200) {
             let { token: newToken } = await loginAttempt.json();
             localStorage.setItem(SWEETFEED_JWT_TOKEN, newToken);
+            setTokenSaved(true);
             debugger
             if (!token) setToken(newToken);
         }
@@ -32,7 +35,7 @@ const Login = props => {
 
     return (
     <div className="login-container">
-        { localStorage.getItem(SWEETFEED_JWT_TOKEN) ? <Redirect to="/" /> : <></>}
+        { tokenSaved ? <Redirect to="/" /> : <></>}
         <h2 className="login-header">Log in</h2>
         <form className="login-form" onSubmit={e => {
             e.preventDefault();

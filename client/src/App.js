@@ -21,6 +21,7 @@ function App() {
     const [currentCollectionId, setCurrentCollectionId] = useState(0);
     const [currentView, setCurrentView] = useState(<></>);
     const [currentCollectionName, setCurrentCollectionName] = useState("");
+    const [tokenSaved, setTokenSaved] = useState(false)
     const retrieveCollections = async () => {
             debugger
             const res = await fetch(`/api/users/${user.id}/collections`);
@@ -61,7 +62,6 @@ function App() {
         }
     }, [user, currentCollectionId, currentCollectionName])
 
-    console.log(user);
 
     return (
         <BrowserRouter>
@@ -74,7 +74,7 @@ function App() {
             <Switch>
 
                 <Route path="/login">
-                    <Login />
+                    <Login setTokenSaved={setTokenSaved} tokenSaved={tokenSaved} />
                 </Route>
 
                 <Route path="/register">
@@ -82,7 +82,7 @@ function App() {
                 </Route>
 
                 <Route path="/">
-                    {!localStorage.getItem(SWEETFEED_JWT_TOKEN) ? <Redirect to='/login' /> : <></>}
+                    {!tokenSaved ? <Redirect to='/login' /> : <></>}
 
                     <div className="main-container">
                         <div className="sidebar">
