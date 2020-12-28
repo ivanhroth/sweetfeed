@@ -47,6 +47,7 @@ function App() {
     const logOut = () => {
         localStorage.removeItem(SWEETFEED_JWT_TOKEN);
         setUser({ id: 0 });
+        setTokenSaved(false);
         setCurrentCollectionId(0);
         setCurrentView(<></>);
     }
@@ -60,6 +61,7 @@ function App() {
             debugger
             retrieveCollections();
         }
+        if (localStorage.getItem(SWEETFEED_JWT_TOKEN)) setTokenSaved(true);
     }, [user, currentCollectionId, currentCollectionName])
 
 
@@ -68,7 +70,7 @@ function App() {
             <nav>
                 <ul>
                     <li><NavLink to="/" exact activeclass="active"><img className="logo" src="/logo.png" onClick={() => setCurrentView(<Intro />)} /></NavLink></li>
-                    {!user.id ? <li><NavLink to="/login" activeclass="active">Log in</NavLink> or <NavLink to="/register" activeclass="active">Register an account</NavLink></li> : <li><NavLink to='/login' activeclass='active' onClick={logOut}>Log out</NavLink></li>}
+                    {!tokenSaved ? <li><NavLink to="/login" activeclass="active">Log in</NavLink> or <NavLink to="/register" activeclass="active">Register an account</NavLink></li> : <li><NavLink to='/login' activeclass='active' onClick={logOut}>Log out</NavLink></li>}
                 </ul>
             </nav>
             <Switch>
