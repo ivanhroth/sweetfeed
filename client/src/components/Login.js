@@ -10,6 +10,7 @@ const Login = props => {
     const [username, updateUsername] = useState("");
     const [password, updatePassword] = useState("");
     const history = useHistory();
+    debugger
     const tryLogin = async () => {
         debugger
         const formIsValid = validateForm();
@@ -20,10 +21,10 @@ const Login = props => {
                 body: JSON.stringify({ username, password })
         });
         if (loginAttempt.status === 200) {
-            let { token } = await loginAttempt.json();
-            localStorage.setItem(SWEETFEED_JWT_TOKEN, token);
+            let { token: newToken } = await loginAttempt.json();
+            localStorage.setItem(SWEETFEED_JWT_TOKEN, newToken);
             debugger
-            setToken(token);
+            if (!token) setToken(newToken);
         }
         else console.error(loginAttempt.msg);
     }
@@ -44,9 +45,7 @@ const Login = props => {
             <input onChange={e => updatePassword(e.target.value)} type="password" placeholder="Password" required />
             </div>
             <div>
-            <button type="submit" onClick={e => {
-            tryLogin();
-        }}>Log in</button>
+            <button type="submit">Log in</button>
             <a href='/register/' id="registration-link">Don't have an account? Click here to register</a>
             </div>
         </form>

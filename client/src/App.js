@@ -21,7 +21,6 @@ function App() {
     const [currentCollectionId, setCurrentCollectionId] = useState(0);
     const [currentView, setCurrentView] = useState(<></>);
     const [currentCollectionName, setCurrentCollectionName] = useState("");
-    //debugger
     const retrieveCollections = async () => {
             debugger
             const res = await fetch(`/api/users/${user.id}/collections`);
