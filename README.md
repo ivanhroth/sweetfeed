@@ -16,12 +16,12 @@ Users can search for feeds by url, and create collections which they can check i
 ##### SweetFeed at a glance
 ![SweetFeed at a glance](overview.png)
 
-SweetFeed locates RSS feeds for users by searching through a give top-level domain using the [FeedSearch API](https://feedsearch.dev). ...
+SweetFeed locates RSS feeds for users by searching through a give top-level domain using the [FeedSearch API](https://feedsearch.dev). Users can then subscribe to those feeds by adding them to individual "collections", and each collection can then be viewed as a feed of recent posts, retrieved directly from their sources using the RSS protocol.
 
 ##### Feed search and collections
 (image)
 
-...
+
 
 ## Application Architecture
 ...
