@@ -21,7 +21,7 @@ SweetFeed locates RSS feeds for users by searching through a give top-level doma
 ##### Feed search and collections
 (image)
 
-
+Users can create and delete "collections" of feeds, which are stored on the backend purely as lists of named feed URLs, linked to "collection" entries in the database which contain the information about the collection as a whole.
 
 ## Application Architecture
 ...
