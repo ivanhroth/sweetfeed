@@ -33,7 +33,7 @@ Users can create and delete "collections" of feeds, which are stored on the back
 
 ### Frontend Technologies Used:
 #### React
-...
+The frontend server is written in React.js, which allows the interface to behave responsively in the process of creating and viewing feed collections.
 
 (include some code snippets in another subsection down here)
 
@@ -42,7 +42,7 @@ Users can create and delete "collections" of feeds, which are stored on the back
 
 ### Backend Technologies Used
 #### Flask
-...
+The backend server is written in Python using Flask to interface with the PostgreSQL database. No major proccessing or interfacing with external APIs is accomplished on the backend server, so
 
 #### PostgreSQL
 ...
