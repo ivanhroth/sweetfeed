@@ -37,6 +37,16 @@ The frontend server is written in React.js, which allows the interface to behave
 
 (include some code snippets in another subsection down here)
 
+### Feedsearch API
+The interaction with the feedsearch.dev API occurs entirely on the frontend. When users enter a url into the search bar, their input is first sanitized. Specifically, prefixes like ``http://`` and ``https://`` are stripped out, because this string is going to be inserted directly into a feedsearch url, and forward slashes are liable to be mistaken for path separators. The code to sanitize this string and then make the fetch request too feedsearch.dev looks like this:
+
+```
+let cleanedURL = newFeed;
+if (cleanedURL.includes('http:') || cleanedURL.includes('https:')) cleanedURL = cleanedURL.split('/').slice(2).join('/');
+const searchRes = await fetch(`/feedsearch/${cleanedURL}`);
+const resultsObj = await searchRes.json();
+```
+
 ## Backend Overview
 ...
 
@@ -50,6 +60,6 @@ The backend server is written in Python using Flask to interface with the Postgr
 (include code snippets in another subsection down here)
 
 ## Conclusion and Next Steps
-...
+In the future, I hope to expand the social features of the app, to allow for more searching and sharing of collections.
 
 Thanks for reading! 🍓
