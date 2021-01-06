@@ -19,7 +19,7 @@ Users can search for feeds by url, and create collections which they can check i
 SweetFeed locates RSS feeds for users by searching through a give top-level domain using the [FeedSearch API](https://feedsearch.dev). Users can then subscribe to those feeds by adding them to individual "collections", and each collection can then be viewed as a feed of recent posts, retrieved directly from their sources using the RSS protocol.
 
 ##### Feed search and collections
-(image)
+![Feed search and collection creation](feedsearch.png)
 
 Users can create and delete "collections" of feeds, which are stored on the backend purely as lists of named feed URLs, linked to "collection" entries in the database which contain the information about the collection as a whole.
 
