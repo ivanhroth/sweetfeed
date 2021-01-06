@@ -52,7 +52,7 @@ The backend server, written in Flask, does no significant processing, and mainly
 
 ### Backend Technologies Used
 #### Flask
-The backend server is written in Python using Flask to interface with the PostgreSQL database. No major proccessing or interfacing with external APIs is accomplished on the backend server, so
+The backend server is written in Python using Flask to interface with the PostgreSQL database. No major proccessing or interfacing with external APIs is accomplished on the backend server, so the primary tasks of the Flask backend server are formatting, storage, and retrieval of basic data fields in relation to users, feeds, and collections.
 
 #### PostgreSQL
 ...
