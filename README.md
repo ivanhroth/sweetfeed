@@ -29,7 +29,7 @@ Users can create and delete "collections" of feeds, which are stored on the back
 (image)
 
 ## Frontend Overview
-...
+Sweetfeed uses an Express.js server on the frontend, with the React framework providing the interface. The frontend also interfaces with an external API to locate RSS feed URLs, via ``feedsearch.dev``.
 
 ### Frontend Technologies Used:
 #### React
