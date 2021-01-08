@@ -54,6 +54,8 @@ The backend server, written in Flask, does no significant processing, and mainly
 #### Flask
 The backend server is written in Python using Flask to interface with a PostgreSQL database. No major proccessing or interfacing with external APIs is accomplished on the backend server, so the primary tasks of the Flask backend server are formatting, storage, and retrieval of basic data fields in relation to users, feeds, and collections.
 
+![Database schema](./documentation/sweetfeedschema.png)
+
 ## Conclusion and Next Steps
 In the future, I hope to expand the social features of the app, to allow for more searching and sharing of collections.
 
