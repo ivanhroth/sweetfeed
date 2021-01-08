@@ -23,11 +23,11 @@ SweetFeed locates RSS feeds for users by searching through a give top-level doma
 
 Users can create and delete "collections" of feeds, which are stored on the backend purely as lists of named feed URLs, linked to "collection" entries in the database which contain the information about the collection as a whole.
 
-## Application Architecture
+<!-- ## Application Architecture
 ...
 
 (image)
-
+ -->
 ## Frontend Overview
 Sweetfeed uses an Express.js server on the frontend, with the React framework providing the interface. The frontend also interfaces with an external API to locate RSS feed URLs, via ``feedsearch.dev``.
 
