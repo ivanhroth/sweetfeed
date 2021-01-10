@@ -3,7 +3,6 @@
 
 **Table of Contents**
 * [SweetFeed at a Glance](#sweetfeed-at-a-glance)
-* [Application Architecture & Technologies Used](#application-architecture)
 * [Frontend Overview](#frontend-overview)
 * [Backend Overview](#backend-overview)
 * [Conclusion & Next Steps](#conclusion-and-next-steps)
