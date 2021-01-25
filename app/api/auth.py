@@ -20,7 +20,7 @@ def signup():
     try:
         db.session.commit()
     except:
-        return jsonify(message='Error'), 409
+        return jsonify(message='Error!'), 409
 
     token = create_access_token(identity=user.username)
     return jsonify(user=user.to_dict(), token=token)
