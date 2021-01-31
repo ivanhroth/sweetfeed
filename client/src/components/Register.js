@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const NONMATCHING_PASSWORDS = "Password fields do not match.";
 const FILL_OUT_ALL_FIELDS = "All fields must be filled out.";
@@ -9,6 +10,8 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [errors, setErrors] = useState([]);
+
+    const history = useHistory();
 
     const tryRegistration = async () => {
         if (password !== passwordConfirm) {
@@ -27,7 +30,9 @@ const Register = () => {
                 })
             });
             const outcome = await res.json();
-            // if successful, redirect to the login page. otherwise, update with errors
+            if (res.status >= 200 && res.status < 400) {
+                history.push('/');
+            }
         }
     }
 
