@@ -10,11 +10,9 @@ const Login = props => {
     const [username, updateUsername] = useState("");
     const [password, updatePassword] = useState("");
     const history = useHistory();
-    debugger
     const setTokenSaved = props.setTokenSaved;
     const tokenSaved = props.tokenSaved;
     const tryLogin = async () => {
-        debugger
         const formIsValid = validateForm();
         if (formIsValid) {
             const loginAttempt = await fetch(`/session`, {
@@ -26,7 +24,6 @@ const Login = props => {
             let { token: newToken } = await loginAttempt.json();
             localStorage.setItem(SWEETFEED_JWT_TOKEN, newToken);
             setTokenSaved(true);
-            debugger
             if (!token) setToken(newToken);
         }
         else console.error(loginAttempt.msg);

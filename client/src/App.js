@@ -12,7 +12,6 @@ function App() {
     const history = useHistory();
 
     const getUserFromToken = token =>{
-        debugger;
         return token ? JSON.parse(atob(token.split('.')[1])) : { id: 0, username: "" };
     }
 
@@ -23,14 +22,12 @@ function App() {
     const [currentCollectionName, setCurrentCollectionName] = useState("");
     const [tokenSaved, setTokenSaved] = useState(false)
     const retrieveCollections = async () => {
-            debugger
             const res = await fetch(`/api/users/${user.id}/collections`);
             const collections = await res.json();
             setMyCollections(collections);
     }
 
     const retrieveUser = async () => {
-            debugger
             if (!localStorage.getItem(SWEETFEED_JWT_TOKEN)){
                 if (!user.triedRetrieving) setUser({...user, triedRetrieving: true});
                 return {};
@@ -54,11 +51,9 @@ function App() {
 
     useEffect(() => {
         if (user.id === 0){
-            debugger
             const retrieveUserResult = retrieveUser();
             if (retrieveUserResult.error) history.push('/login');
         } else {
-            debugger
             retrieveCollections();
         }
         if (localStorage.getItem(SWEETFEED_JWT_TOKEN)) setTokenSaved(true);
