@@ -34,13 +34,13 @@ const Login = props => {
     <div className="login-container">
         { tokenSaved ? <Redirect to="/" /> : <></>}
         <div id="login-header-container" >
-            <h2 className="login-header">Log in</h2>
+            <h2 className="login-header">Log In</h2>
         </div>
         <form className="login-form" onSubmit={e => {
             e.preventDefault();
             tryLogin();
         }}>
-            <div className="login-button-container">
+            <div className="login-form-container">
                 <div>
                 <input onChange={e => updateUsername(e.target.value)} type="username" placeholder="Username" required />
                 </div>
