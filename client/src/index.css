@@ -135,6 +135,21 @@ input {
     text-align: center;
 }
 
+#login-header-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.login-button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-button-container button {
+    margin: 10px auto;
+    width: 200px;
+}
+
 .login-container {
     display: flex;
     flex-direction: column;

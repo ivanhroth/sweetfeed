@@ -33,20 +33,22 @@ const Login = props => {
     return (
     <div className="login-container">
         { tokenSaved ? <Redirect to="/" /> : <></>}
-        <h2 className="login-header">Log in</h2>
+        <div id="login-header-container" >
+            <h2 className="login-header">Log in</h2>
+        </div>
         <form className="login-form" onSubmit={e => {
             e.preventDefault();
             tryLogin();
         }}>
-            <div>
-            <input onChange={e => updateUsername(e.target.value)} type="username" placeholder="Username" required />
-            </div>
-            <div>
-            <input onChange={e => updatePassword(e.target.value)} type="password" placeholder="Password" required />
-            </div>
-            <div>
-            <button type="submit">Log in</button>
-            <a href='/register/' id="registration-link">Don't have an account? Click here to register</a>
+            <div className="login-button-container">
+                <div>
+                <input onChange={e => updateUsername(e.target.value)} type="username" placeholder="Username" required />
+                </div>
+                <div>
+                <input onChange={e => updatePassword(e.target.value)} type="password" placeholder="Password" required />
+                </div>
+                <button type="submit">Log in</button>
+                <a href='/register/' id="registration-link">Don't have an account? Click here to register</a>
             </div>
         </form>
   </div>
