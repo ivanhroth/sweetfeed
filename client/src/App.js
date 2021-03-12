@@ -50,9 +50,10 @@ function App() {
     }
 
     useEffect(() => {
-        if (user.id === 0){
+        if (user && user.id === 0){
             const retrieveUserResult = retrieveUser();
             if (retrieveUserResult.error) history.push('/login');
+            else setUser(retrieveUserResult);
         } else {
             retrieveCollections();
         }
